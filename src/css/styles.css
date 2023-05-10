@@ -31,12 +31,16 @@ img {
   width: 250px;
   height: 200px;
 }
-.btnBack {
-  display: none;
-}
-.btnNext {
-  display: none;
-}
+
 .send {
   position: absolute;
+}
+footer {
+  display: flex;
+  background-color: navy;
+  height: 50px;
+  width: 100vw;
+}
+.h2 {
+  color: #ffffff;
 }
