@@ -10,7 +10,7 @@ nav {
   align-items: center;
   justify-content: center;
 }
-.gallery {
+.cards {
   background-color: aliceblue;
   display: flex;
   flex-direction: row;
