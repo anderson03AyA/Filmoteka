@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+nav {
+  background-color: hsla(155, 81%, 56%, 0.599);
+  padding: 1rem 0 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gallery {
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+.navegation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 2rem;
+  gap: 2rem;
+  padding: 1rem;
+  position: relative;
+}
+img {
+  width: 250px;
+  height: 200px;
+}
+.btnBack {
+  display: none;
+}
+.btnNext {
+  display: none;
+}
+.send {
+  position: absolute;
+}
