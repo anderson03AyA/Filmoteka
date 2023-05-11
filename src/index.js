@@ -1,9 +1,5 @@
 import { getGenres } from './genres';
-const listGenres = getGenres();
-listGenres.then(results => {
-  resultsGenre = results.genres;
-  console.log(resultsGenre);
-});
+
 
 const searchInput = document.querySelector('.search');
 let id = searchInput.value;
@@ -24,6 +20,12 @@ const baseImageUrl = 'https://image.tmdb.org/t/p/';
 let currentPage = 1;
 let totalPages = 1;
 const resultsPerPage = 20;
+
+const listGenres = getGenres();
+listGenres.then(results => {
+  resultsGenre = results.genres;
+  console.log(resultsGenre);
+});
 
 async function getDate(page) {
   try {
