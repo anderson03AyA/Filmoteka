@@ -1,4 +1,4 @@
-const { getGenres } = require('./genres');
+import { getGenres } from './genres';
 
 const searchInput = document.querySelector('.search');
 let id = searchInput.value;
@@ -6,6 +6,7 @@ const send = document.querySelector('.send');
 const div = document.querySelector('.movies-container');
 
 const API_KEY = '9aaec7b70164094369485674dba76f62';
+let API_URL = '';
 
 const CATEGORIES = {
   trending: '/trending/movie/week',
@@ -19,6 +20,7 @@ const baseImageUrl = 'https://image.tmdb.org/t/p/';
 let currentPage = 1;
 let totalPages = 1;
 const resultsPerPage = 20;
+let resultsGenre = [];
 
 const listGenres = getGenres();
 listGenres.then(results => {
@@ -95,7 +97,6 @@ function updatePagination() {
 send.addEventListener('click', async e => {
   e.preventDefault();
   if (searchInput.value === '') {
-    Notify.warning('input invalid');
   } else {
     id = searchInput.value;
     API_URL = `https://api.themoviedb.org/3${CATEGORIES.querySearch}?api_key=${API_KEY}&query=${id}${CATEGORIES.basic}`;

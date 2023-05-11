@@ -1,4 +1,6 @@
 export const getGenres = async () => {
+const API_KEY = '9aaec7b70164094369485674dba76f62';
+
   const options = {
     method: 'GET',
     headers: {
@@ -10,7 +12,7 @@ export const getGenres = async () => {
 
   try {
     const response = await fetch(
-      'https://api.themoviedb.org/3/genre/movie/list?language=en',
+      `https://api.themoviedb.org/3/genre/movie/list?language=en&api_key=${API_KEY}`,
       options
     );
 
