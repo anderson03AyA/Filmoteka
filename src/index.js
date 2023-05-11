@@ -1,10 +1,16 @@
+import { getGenres } from './genres';
+const listGenres = getGenres();
+listGenres.then(results => {
+  resultsGenre = results.genres;
+  console.log(resultsGenre);
+});
+
 const searchInput = document.querySelector('.search');
 let id = searchInput.value;
 const send = document.querySelector('.send');
 const div = document.querySelector('.movies-container');
 
 const API_KEY = '9aaec7b70164094369485674dba76f62';
-let API_URL = `https://api.themoviedb.org/3/movie/${id}`;
 
 const CATEGORIES = {
   trending: '/trending/movie/week',
@@ -15,18 +21,13 @@ const CATEGORIES = {
 
 const baseImageUrl = 'https://image.tmdb.org/t/p/';
 
-const TITLE = document.getElementById('titulo-pelicula');
-const OVERVIEW = document.getElementById('descripcion-pelicula');
-const LANZAMIENTO = document.getElementById('ano-lanzamiento');
-const POSTER_PELICULA = document.getElementById('poster-pelicula');
-
 let currentPage = 1;
 let totalPages = 1;
 const resultsPerPage = 20;
 
 async function getDate(page) {
   try {
-    const response = await fetch(API_URL + `&page=${page}`);
+    const response = await fetch(`${API_URL} &page=${page}`);
     const data = await response.json();
 
     console.log(data);
@@ -36,19 +37,29 @@ async function getDate(page) {
       // Obtener los resultados de la página actual
       const movies = data.results;
 
-      const movieCards = movies.map((movie) => {
+      let indice = 0;
+      const movieCards = movies.map(movie => {
+        const idGenres = data.results[indice].genre_ids;
+
+        let result = resultsGenre.filter(filtro =>
+          idGenres.includes(filtro.id)
+        );
+        console.log(result);
+
         const title = movie.title;
-        const description = movie.overview;
         const releaseYear = movie.release_date;
         const moviePoster = `${baseImageUrl}w500${movie.poster_path}`;
 
+        indice++;
+
+        let resultGenre = result.map(genre => genre.name);
         return `<div class="photo-card">
           <div class="info">
             <p class="info-item">
               <strong>${title}</strong>
             </p>
             <p class="info-item">
-              <strong>${description}</strong>
+              <strong>${resultGenre}</strong>
             </p>
             <p class="info-item">
               <strong>${releaseYear}</strong>
@@ -78,7 +89,7 @@ function updatePagination() {
   document.getElementById('total-pages').textContent = totalPages;
 }
 
-send.addEventListener('click', async (e) => {
+send.addEventListener('click', async e => {
   e.preventDefault();
   if (searchInput.value === '') {
     Notify.warning('input invalid');
@@ -88,7 +99,6 @@ send.addEventListener('click', async (e) => {
     currentPage = 1;
     await getDate(currentPage);
     updatePagination();
-    console.log(e);
   }
 });
 
