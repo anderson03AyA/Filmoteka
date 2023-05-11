@@ -1,12 +1,11 @@
-import { getGenres } from './genres';
+const { getGenres } = require('./genres');
+
 const searchInput = document.querySelector('.search');
 let id = searchInput.value;
 const send = document.querySelector('.send');
 const div = document.querySelector('.movies-container');
 
 const API_KEY = '9aaec7b70164094369485674dba76f62';
-const API_URL =`https://api.themoviedb.org/3${CATEGORIES.querySearch}?api_key=${API_KEY}&query=${id}${CATEGORIES.basic}`;
-   
 
 const CATEGORIES = {
   trending: '/trending/movie/week',
