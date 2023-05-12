@@ -1,5 +1,6 @@
 import { getGenres } from './genres';
 
+
 const searchInput = document.querySelector('.search');
 let id = searchInput.value;
 const send = document.querySelector('.send');
@@ -57,18 +58,21 @@ async function getDate(page) {
         let resultGenre = result.map(genre => genre.name);
         return `<div class="photo-card">
           <div class="info">
-              <p class="info-item">
-              <strong>${title}</strong>
-            </p>
-            <p class="info-item">
-              <strong>${resultGenre}</strong>
-            </p>
-            <p class="info-item">
-              <strong>${releaseYear}</strong>
-            </p>
-            <a href="${moviePoster}" class="gallery">
-              <img src="${moviePoster}" alt="" loading="lazy" width="100px" height="100px" />
+            <a href="${moviePoster}" class="info__poster">
+              <img class="info__poster--img" src="${moviePoster}" alt="" loading="lazy" width="100px" height="100px" />
             </a>
+              <h3 class="info__title">
+              <strong class="title">${title}</strong>
+            </h3>
+            <p class="info__genre">
+              ${resultGenre}
+               |
+               ${releaseYear}
+            </p>
+            <p class="info-item">
+             
+            </p>
+          
           </div>
         </div>`;
       });
@@ -103,17 +107,18 @@ send.addEventListener('click', async e => {
   }
 });
 
-document.getElementById('prev-page').addEventListener('click', async () => {
+document.getElementById('pagination__prev-page').addEventListener('click', async () => {
   if (currentPage > 1) {
     currentPage--;
     await getDate(currentPage);
     updatePagination();
   }
 });
-document.getElementById('next-page').addEventListener('click', async () => {
+document.getElementById('pagination__next-page').addEventListener('click', async () => {
   if (currentPage < totalPages) {
     currentPage++;
     await getDate(currentPage);
     updatePagination();
   }
 });
+

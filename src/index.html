@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/stylesSass.css">
   <title>Filmoteka-group4</title>
 </head>
 <body>
@@ -12,7 +13,7 @@
    <nav class="cards">
         <form class="search-form" id="search-form">
           <input
-          value="maquinas mortales"
+          value="terror"
             type="text"
             class="search"
             name="searchQuery"
@@ -24,14 +25,15 @@
       </nav>
 </header>
 <main>
-  <h1>PELICULAS</h1>
-  <div class="movies-container">
+ <section class="section">
+   <div class="movies-container">
   </div>
+ </section>
 
   <div id="pagination">
-  <button id="prev-page">Anterior</button>
+  <button id="pagination__prev-page">Anterior</button>
   <span>Página <span id="current-page"></span> de <span id="total-pages"></span></span>
-  <button id="next-page">Siguiente</button>
+  <button id="pagination__next-page">Siguiente</button>
 </div>
 
 </main>

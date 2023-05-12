@@ -1,0 +1,43 @@
+@import 'colors';
+body {
+    background-color: $color-body;
+}
+.section {
+    margin: 60px 0 60px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+}
+.movies-container {
+    max-width: 1200px;
+    margin: 0;
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+    justify-content: center;
+}
+
+.info {
+    &__genre {
+        color: $color-genres;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+    }
+    &__poster {
+       &--img{
+         width: 274px;
+        height: 398px;
+        border-radius: 5px;
+       }
+    }
+}
+
+#pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
