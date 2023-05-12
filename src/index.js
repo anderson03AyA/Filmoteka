@@ -59,9 +59,6 @@ async function getDate(page) {
           <div class="info">
               <p class="info-item">
               <strong>${title}</strong>
-              <strong>${title}</strong>
-              <strong>${title}</strong>
-              <strong>${title}</strong>
             </p>
             <p class="info-item">
               <strong>${resultGenre}</strong>
