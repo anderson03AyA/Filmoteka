@@ -1,0 +1,2 @@
+body{background-color:#e5e5e5}.section{width:100vw;justify-content:center;align-items:center;margin:60px 0;display:flex}.movies-container{max-width:1200px;grid-gap:30px;grid-template-columns:repeat(3,1fr);justify-content:center;align-items:center;justify-items:center;margin:0;display:grid}.info__genre{color:#ff6b08;font-size:12px;font-weight:500;line-height:16px}.info__poster--img{width:274px;height:398px;border-radius:5px}#pagination{justify-content:center;align-items:center;display:flex}
+/*# sourceMappingURL=index.3c4ee155.css.map */
