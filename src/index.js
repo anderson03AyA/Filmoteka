@@ -57,9 +57,6 @@ async function getDate(page) {
         let resultGenre = result.map(genre => genre.name);
         return `<div class="photo-card">
           <div class="info">
-            <p class="info-item">
-              <strong>${title}</strong>
-            </p>
               <p class="info-item">
               <strong>${title}</strong>
               <strong>${title}</strong>
