@@ -62,6 +62,9 @@ async function getDate(page) {
             </p>
               <p class="info-item">
               <strong>${title}</strong>
+              <strong>${title}</strong>
+              <strong>${title}</strong>
+              <strong>${title}</strong>
             </p>
             <p class="info-item">
               <strong>${resultGenre}</strong>
