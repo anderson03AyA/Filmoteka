@@ -1,4 +1,6 @@
 @import 'colors';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
 body {
     background-color: $color-body;
 }
@@ -21,7 +23,11 @@ body {
 }
 
 .info {
+    &__title{ 
+        font-family: 'Roboto', sans-serif;
+    }
     &__genre {
+        font-family: 'Roboto', sans-serif;
         color: $color-genres;
         font-weight: 500;
         font-size: 12px;
@@ -35,9 +41,36 @@ body {
        }
     }
 }
-
+li{
+    background-color: aqua;
+}
+ul {
+    background-color: tan;
+    margin-top: 30px;
+}
+.currentPage {
+    background-color: red;
+}
 #pagination {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+@media screen and (max-width: 480px) {
+    .movies-container {  
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    }
+    .info {
+        &__genre{
+            line-height: 14px;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+      .movies-container {  
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    }
 }
