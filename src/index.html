@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/stylesSass.css">
-  <title>Filmoteka-group4</title>
-</head>
-<body>
-<header>
-   <nav class="cards">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/stylesSass.css" />
+
+    <title>Filmoteka-group4</title>
+  </head>
+  <body>
+    <header>
+      <nav class="cards">
         <form class="search-form" id="search-form">
           <input
-          value="terror"
+            value="terror"
             type="text"
             class="search"
             name="searchQuery"
@@ -23,25 +30,25 @@
           <button type="submit" class="send">Search</button>
         </form>
       </nav>
-</header>
-<main>
- <section class="section">
-   <div class="movies-container">
-  </div>
- </section>
+    </header>
+    <main>
+      <section class="section">
+        <div class="movies-container"></div>
+      </section>
 
-  <div id="pagination">
-  <button id="pagination__prev-page">Anterior</button>
-  <span>Página <span id="current-page"></span> de <span id="total-pages"></span></span>
-  <button id="pagination__next-page">Siguiente</button>
-</div>
+      <div id="pagination">
+        <button id="pagination__prev-page">Anterior</button>
+            <ul class="ul-pages">
+              
+            </ul>
 
-</main>
- 
+        <button id="pagination__next-page">Siguiente</button>
+      </div>
+    </main>
 
-<footer class="footer">
-  <h2 class="h2"> footer </h2>
-</footer>
-<script src="index.js" type="module"></script>
-</body>
+    <footer class="footer">
+      <h2 class="h2">footer</h2>
+    </footer>
+    <script src="index.js" type="module"></script>
+  </body>
 </html>

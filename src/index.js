@@ -1,6 +1,6 @@
 import { getGenres } from './genres';
 
-
+const ulPages = document.querySelector('.ul-pages');
 const searchInput = document.querySelector('.search');
 let id = searchInput.value;
 const send = document.querySelector('.send');
@@ -40,8 +40,76 @@ async function getDate(page) {
     if (data.results && data.results.length > 0) {
       // Obtener los resultados de la página actual
       const movies = data.results;
-
       let indice = 0;
+      totalPages = data.total_pages;
+      let li = ``;
+      //pages style
+      if (totalPages < 10) {
+        for (let i = 0; i < totalPages; i++) {
+          li += `<li> ${i + 1}</li>`;
+        }
+      } else {
+        if (currentPage >= 4) {
+          //page start
+          li += `<li>1</li>`;
+          li += `<li>...</li>`;
+          //2 antes del page
+          li += `<li>${currentPage - 2}</li>`;
+          li += `<li>${currentPage - 1}</li>`;
+          //page current
+          li += `<li  class="currentPage">${currentPage}</li>`;
+          //next2 page
+          li += `<li>${currentPage + 1}</li>`;
+          li += `<li>${currentPage + 2}</li>`;
+          li += `<li>...</li>`;
+          //page end
+          li += `<li>${totalPages}</li>`;
+        }
+        else if (currentPage == 3) {
+          
+          li += `<li>${currentPage - 2}</li>`;
+          li += `<li>${currentPage - 1}</li>`;
+          for (let i = currentPage; i < currentPage + 5; i++) {
+            if (i === currentPage) {
+              li += `<li class="currentPage">${i}</li>`;
+            } else {
+              li += `<li>${i}</li>`;
+            }
+          }
+          li += `<li>...</li>`;
+          //page end
+          li += `<li>${totalPages}</li>`;
+        }
+        else if (currentPage == 2) {
+  
+           li += `<li>${currentPage - 1}</li>`;
+          for (let i = currentPage; i < currentPage + 6; i++) {
+             if (i === currentPage) {
+               li += `<li class="currentPage">${i}</li>`;
+             } else {
+               li += `<li>${i}</li>`;
+             }
+          }
+            li += `<li>...</li>`;
+            //page end
+            li += `<li>${totalPages}</li>`;
+        }
+        else if (currentPage == 1) {
+          for (let i = currentPage; i < currentPage + 7; i++){
+             if (i === currentPage) {
+               li += `<li class="currentPage">${i}</li>`;
+             } else {
+               li += `<li>${i}</li>`;
+             }
+          }
+           li += `<li>...</li>`;
+           //page end
+           li += `<li>${totalPages}</li>`;
+        }
+        
+      }
+      ulPages.innerHTML = li;
+
       const movieCards = movies.map(movie => {
         const idGenres = data.results[indice].genre_ids;
 
@@ -107,18 +175,21 @@ send.addEventListener('click', async e => {
   }
 });
 
-document.getElementById('pagination__prev-page').addEventListener('click', async () => {
-  if (currentPage > 1) {
-    currentPage--;
-    await getDate(currentPage);
-    updatePagination();
-  }
-});
-document.getElementById('pagination__next-page').addEventListener('click', async () => {
-  if (currentPage < totalPages) {
-    currentPage++;
-    await getDate(currentPage);
-    updatePagination();
-  }
-});
-
+document
+  .getElementById('pagination__prev-page')
+  .addEventListener('click', async () => {
+    if (currentPage > 1) {
+      currentPage--;
+      await getDate(currentPage);
+      updatePagination();
+    }
+  });
+document
+  .getElementById('pagination__next-page')
+  .addEventListener('click', async () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      await getDate(currentPage);
+      updatePagination();
+    }
+  });

@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 nav {
   background-color: hsla(222, 81%, 56%, 0.599);
