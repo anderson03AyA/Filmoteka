@@ -45,7 +45,11 @@ async function getDate(page) {
       //pages style with dots
       if (totalPages < 10) {
         for (let i = 0; i < totalPages; i++) {
-          li += `<li> ${i + 1}</li>`;
+          if (i+1 === currentPage) {
+            li += `<li class="currentPage"> ${i + 1}</li>`;
+          } else {
+            li += `<li> ${i + 1}</li>`;
+          }
         }
       } else {
         //for handle dots
@@ -115,60 +119,61 @@ async function getDate(page) {
           //page end
           li += `<li>${totalPages}</li>`;
         }
-      }
-      //page Styles dots End
-      if (currentPage + 4 > totalPages) {
-        li += `<li>1</li>`;
-        li += `<li>...</li>`;
+        //page Styles dots End
+        else if (currentPage + 4 > totalPages) {
+          li += `<li>1</li>`;
+          li += `<li>...</li>`;
 
-        if (currentPage === totalPages - 3) {
-          li += `<li>${currentPage - 3}</li>`;
-          li += `<li>${currentPage - 2}</li>`;
-          li += `<li>${currentPage - 1}</li>`;
+          if (currentPage === totalPages - 3) {
+            li += `<li>${currentPage - 3}</li>`;
+            li += `<li>${currentPage - 2}</li>`;
+            li += `<li>${currentPage - 1}</li>`;
 
-          li += `<li class="currentPage">${currentPage}</li>`;
+            li += `<li class="currentPage">${currentPage}</li>`;
 
-          for (i = 1; i < 4; i++) {
-            li += `<li>${currentPage + i}</li>`;
-          }
-        } else if (currentPage === totalPages - 2) {
-          li += `<li>${currentPage - 4}</li>`;
-          li += `<li>${currentPage - 3}</li>`;
-          li += `<li>${currentPage - 2}</li>`;
-          li += `<li>${currentPage - 1}</li>`;
+            for (i = 1; i < 4; i++) {
+              li += `<li>${currentPage + i}</li>`;
+            }
+          } else if (currentPage === totalPages - 2) {
+            li += `<li>${currentPage - 4}</li>`;
+            li += `<li>${currentPage - 3}</li>`;
+            li += `<li>${currentPage - 2}</li>`;
+            li += `<li>${currentPage - 1}</li>`;
 
-          li += `<li class="currentPage">${currentPage}</li>`;
+            li += `<li class="currentPage">${currentPage}</li>`;
 
-          for (i = 1; i < 3; i++) {
-            li += `<li>${currentPage + i}</li>`;
-          }
-        } else if (currentPage === totalPages - 1) {
-          li += `<li>${currentPage - 5}</li>`;
-          li += `<li>${currentPage - 4}</li>`;
-          li += `<li>${currentPage - 3}</li>`;
-          li += `<li>${currentPage - 2}</li>`;
-          li += `<li>${currentPage - 1}</li>`;
+            for (i = 1; i < 3; i++) {
+              li += `<li>${currentPage + i}</li>`;
+            }
+          } else if (currentPage === totalPages - 1) {
+            li += `<li>${currentPage - 5}</li>`;
+            li += `<li>${currentPage - 4}</li>`;
+            li += `<li>${currentPage - 3}</li>`;
+            li += `<li>${currentPage - 2}</li>`;
+            li += `<li>${currentPage - 1}</li>`;
 
-          li += `<li class="currentPage">${currentPage}</li>`;
+            li += `<li class="currentPage">${currentPage}</li>`;
 
-          for (i = 1; i < 2; i++) {
-            li += `<li>${currentPage + i}</li>`;
-          }
-        } else if (currentPage === totalPages) {
-          li += `<li>${currentPage - 6}</li>`;
-          li += `<li>${currentPage - 5}</li>`;
-          li += `<li>${currentPage - 4}</li>`;
-          li += `<li>${currentPage - 3}</li>`;
-          li += `<li>${currentPage - 2}</li>`;
-          li += `<li>${currentPage - 1}</li>`;
+            for (i = 1; i < 2; i++) {
+              li += `<li>${currentPage + i}</li>`;
+            }
+          } else if (currentPage === totalPages) {
+            li += `<li>${currentPage - 6}</li>`;
+            li += `<li>${currentPage - 5}</li>`;
+            li += `<li>${currentPage - 4}</li>`;
+            li += `<li>${currentPage - 3}</li>`;
+            li += `<li>${currentPage - 2}</li>`;
+            li += `<li>${currentPage - 1}</li>`;
 
-          li += `<li class="currentPage">${currentPage}</li>`;
+            li += `<li class="currentPage">${currentPage}</li>`;
 
-          for (i = 1; i < 1; i++) {
-            li += `<li>${currentPage + i}</li>`;
+            for (i = 1; i < 1; i++) {
+              li += `<li>${currentPage + i}</li>`;
+            }
           }
         }
       }
+     
 
       ulPages.innerHTML = li;
 
