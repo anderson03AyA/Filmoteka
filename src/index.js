@@ -228,7 +228,6 @@ send.addEventListener('click', async e => {
   if (searchInput.value === '') {
   } else {
     ulPages.value = '';
-    li = '';
     id = searchInput.value;
     API_URL = `https://api.themoviedb.org/3${CATEGORIES.querySearch}?api_key=${API_KEY}&query=${id}${CATEGORIES.basic}`;
     currentPage = 1;
