@@ -20,7 +20,6 @@ const baseImageUrl = 'https://image.tmdb.org/t/p/';
 
 let currentPage = 1;
 let totalPages = 1;
-const resultsPerPage = 20;
 let resultsGenre = [];
 
 const listGenres = getGenres();
@@ -43,44 +42,8 @@ async function getDate(page) {
       let indice = 0;
       totalPages = data.total_pages;
       let li = ``;
-      //page Styles dots End
-      if (currentPage + 4 > totalPages) {
-        if (currentPage + 4 == totalPages) {
-          alert(`${currentPage+4}`)
-          li += `<li>${currentPage + 1}</li>`;
-          li += `<li>${currentPage + 2}</li>`;
-          li += `<li>${currentPage + 3}</li>`;
-          for (let i = currentPage; i < currentPage + 5; i++) {
-            if (i === currentPage) {
-              li += `<li class="currentPage">${i}</li>`;
-            } else {
-              li += `<li>${i}</li>`;
-            }
-          }
-          li += `<li>...</li>`;
-          //page end
-          li += `<li>${totalPages}</li>`;
-        }
-
-
-
-        else if (currentPage + 3 == totalPages) {
-          li += `<li>${currentPage + 1}</li>`;
-          li += `<li>${currentPage + 2}</li>`;
-          for (let i = currentPage; i < currentPage + 5; i++) {
-            if (i === currentPage) {
-              li += `<li class="currentPage">${i}</li>`;
-            } else {
-              li += `<li>${i}</li>`;
-            }
-          }
-          li += `<li>...</li>`;
-          //page end
-          li += `<li>${totalPages}</li>`;
-        }
-      }
       //pages style with dots
-      else if (totalPages < 10) {
+      if (totalPages < 10) {
         for (let i = 0; i < totalPages; i++) {
           li += `<li> ${i + 1}</li>`;
         }
@@ -153,6 +116,59 @@ async function getDate(page) {
           li += `<li>${totalPages}</li>`;
         }
       }
+      //page Styles dots End
+      if (currentPage + 4 > totalPages) {
+        li += `<li>1</li>`;
+        li += `<li>...</li>`;
+
+        if (currentPage === totalPages - 3) {
+          li += `<li>${currentPage - 3}</li>`;
+          li += `<li>${currentPage - 2}</li>`;
+          li += `<li>${currentPage - 1}</li>`;
+
+          li += `<li class="currentPage">${currentPage}</li>`;
+
+          for (i = 1; i < 4; i++) {
+            li += `<li>${currentPage + i}</li>`;
+          }
+        } else if (currentPage === totalPages - 2) {
+          li += `<li>${currentPage - 4}</li>`;
+          li += `<li>${currentPage - 3}</li>`;
+          li += `<li>${currentPage - 2}</li>`;
+          li += `<li>${currentPage - 1}</li>`;
+
+          li += `<li class="currentPage">${currentPage}</li>`;
+
+          for (i = 1; i < 3; i++) {
+            li += `<li>${currentPage + i}</li>`;
+          }
+        } else if (currentPage === totalPages - 1) {
+          li += `<li>${currentPage - 5}</li>`;
+          li += `<li>${currentPage - 4}</li>`;
+          li += `<li>${currentPage - 3}</li>`;
+          li += `<li>${currentPage - 2}</li>`;
+          li += `<li>${currentPage - 1}</li>`;
+
+          li += `<li class="currentPage">${currentPage}</li>`;
+
+          for (i = 1; i < 2; i++) {
+            li += `<li>${currentPage + i}</li>`;
+          }
+        } else if (currentPage === totalPages) {
+          li += `<li>${currentPage - 6}</li>`;
+          li += `<li>${currentPage - 5}</li>`;
+          li += `<li>${currentPage - 4}</li>`;
+          li += `<li>${currentPage - 3}</li>`;
+          li += `<li>${currentPage - 2}</li>`;
+          li += `<li>${currentPage - 1}</li>`;
+
+          li += `<li class="currentPage">${currentPage}</li>`;
+
+          for (i = 1; i < 1; i++) {
+            li += `<li>${currentPage + i}</li>`;
+          }
+        }
+      }
 
       ulPages.innerHTML = li;
 
@@ -203,21 +219,17 @@ async function getDate(page) {
   }
 }
 
-function updatePagination() {
-  // Actualizar estado de la paginación
-  document.getElementById('current-page').textContent = currentPage;
-  document.getElementById('total-pages').textContent = totalPages;
-}
 
 send.addEventListener('click', async e => {
   e.preventDefault();
   if (searchInput.value === '') {
   } else {
+    ulPages.value=""
+    li = ""
     id = searchInput.value;
     API_URL = `https://api.themoviedb.org/3${CATEGORIES.querySearch}?api_key=${API_KEY}&query=${id}${CATEGORIES.basic}`;
     currentPage = 1;
     await getDate(currentPage);
-    updatePagination();
   }
 });
 
@@ -227,7 +239,6 @@ document
     if (currentPage > 1) {
       currentPage--;
       await getDate(currentPage);
-      updatePagination();
     }
   });
 document
@@ -236,6 +247,5 @@ document
     if (currentPage < totalPages) {
       currentPage++;
       await getDate(currentPage);
-      updatePagination();
     }
   });
