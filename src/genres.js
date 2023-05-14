@@ -1,5 +1,6 @@
+import { myValue } from "./key"; './key'
 export const getGenres = async () => {
-const API_KEY = '9aaec7b70164094369485674dba76f62';
+const API_KEY = myValue;
 
   const options = {
     method: 'GET',
