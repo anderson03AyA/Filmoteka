@@ -53,6 +53,7 @@
           <nav class="cards">
             <form class="search-form" id="search-form">
               <input
+              value="miedo"
                 class="search"
                 type="text " required
                 name="searchQuery"
@@ -76,12 +77,16 @@
         </section>
 
         <div id="pagination">
-          <button id="pagination__prev-page">Anterior</button>
-              <ul class="ul-pages">
+          <button id="pagination__prev-page" class="pagination__button">
+            <img class="pagination__back pagination__svg" src="./images/arrow-left.svg" alt="search">
+          </button>
+              <ul class="pagination__page">
                 
               </ul>
 
-          <button id="pagination__next-page">Siguiente</button>
+          <button id="pagination__next-page" class="pagination__button">
+             <img class="pagination__back pagination__svg" src="./images/arrow-right.svg" alt="search">
+          </button>
         </div>
       </main>
 
