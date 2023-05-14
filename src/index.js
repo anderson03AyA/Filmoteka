@@ -1,4 +1,5 @@
 import { getGenres } from './genres';
+import { openModal, closeModal } from './movieModal.js';
 
 const ulPages = document.querySelector('.ul-pages');
 const searchInput = document.querySelector('.search');
@@ -66,7 +67,7 @@ async function getDate(page) {
           li += `<li>${totalPages}</li>`;
         }
         else if (currentPage == 3) {
-          
+
           li += `<li>${currentPage - 2}</li>`;
           li += `<li>${currentPage - 1}</li>`;
           for (let i = currentPage; i < currentPage + 5; i++) {
@@ -81,32 +82,32 @@ async function getDate(page) {
           li += `<li>${totalPages}</li>`;
         }
         else if (currentPage == 2) {
-  
-           li += `<li>${currentPage - 1}</li>`;
+
+          li += `<li>${currentPage - 1}</li>`;
           for (let i = currentPage; i < currentPage + 6; i++) {
-             if (i === currentPage) {
-               li += `<li class="currentPage">${i}</li>`;
-             } else {
-               li += `<li>${i}</li>`;
-             }
+            if (i === currentPage) {
+              li += `<li class="currentPage">${i}</li>`;
+            } else {
+              li += `<li>${i}</li>`;
+            }
           }
-            li += `<li>...</li>`;
-            //page end
-            li += `<li>${totalPages}</li>`;
+          li += `<li>...</li>`;
+          //page end
+          li += `<li>${totalPages}</li>`;
         }
         else if (currentPage == 1) {
-          for (let i = currentPage; i < currentPage + 7; i++){
-             if (i === currentPage) {
-               li += `<li class="currentPage">${i}</li>`;
-             } else {
-               li += `<li>${i}</li>`;
-             }
+          for (let i = currentPage; i < currentPage + 7; i++) {
+            if (i === currentPage) {
+              li += `<li class="currentPage">${i}</li>`;
+            } else {
+              li += `<li>${i}</li>`;
+            }
           }
-           li += `<li>...</li>`;
-           //page end
-           li += `<li>${totalPages}</li>`;
+          li += `<li>...</li>`;
+          //page end
+          li += `<li>${totalPages}</li>`;
         }
-        
+
       }
       ulPages.innerHTML = li;
 
@@ -116,8 +117,6 @@ async function getDate(page) {
         let result = resultsGenre.filter(filtro =>
           idGenres.includes(filtro.id)
         );
-        console.log(result);
-
         const title = movie.title;
         const releaseYear = movie.release_date;
         const moviePoster = `${baseImageUrl}w500${movie.poster_path}`;
@@ -126,8 +125,8 @@ async function getDate(page) {
         let resultGenre = result.map(genre => genre.name);
         return `<div class="photo-card">
           <div class="info">
-            <a href="${moviePoster}" class="info__poster">
-              <img class="info__poster--img" src="${moviePoster}" alt="" loading="lazy" width="100px" height="100px" />
+            <a onclick="openModal('${movie.id}')" class="info__poster">
+              <img class="info__poster--img" src="${moviePoster}" alt="" loading="lazy" width="100px" height="100px" id= "info__poster--img"/>
             </a>
               <h3 class="info__title">
               <strong class="title">${title}</strong>
