@@ -2,7 +2,9 @@ import { getGenres } from './genres';
 
 const ulPages = document.querySelector('.pagination__page');
 const searchInput = document.querySelector('.search');
-let id = searchInput.value;
+if (searchInput !== '') {
+  let id = searchInput.value;
+}
 const send = document.querySelector('.send');
 const div = document.querySelector('.movies-container');
 
@@ -131,7 +133,7 @@ async function getDate(page) {
 
             li += `<li class="currentPage">${currentPage}</li>`;
 
-            for (i = 1; i < 4; i++) {
+            for (let i = 1; i < 4; i++) {
               li += `<li>${currentPage + i}</li>`;
             }
           } else if (currentPage === totalPages - 2) {
@@ -142,7 +144,7 @@ async function getDate(page) {
 
             li += `<li class="currentPage">${currentPage}</li>`;
 
-            for (i = 1; i < 3; i++) {
+            for (let i = 1; i < 3; i++) {
               li += `<li>${currentPage + i}</li>`;
             }
           } else if (currentPage === totalPages - 1) {
@@ -154,7 +156,7 @@ async function getDate(page) {
 
             li += `<li class="currentPage">${currentPage}</li>`;
 
-            for (i = 1; i < 2; i++) {
+            for (let i = 1; i < 2; i++) {
               li += `<li>${currentPage + i}</li>`;
             }
           } else if (currentPage === totalPages) {
@@ -167,9 +169,7 @@ async function getDate(page) {
 
             li += `<li class="currentPage">${currentPage}</li>`;
 
-            for (i = 1; i < 1; i++) {
-              li += `<li>${currentPage + i}</li>`;
-            }
+            li += `<li>${currentPage + 1}</li>`;
           }
         }
       }
