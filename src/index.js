@@ -131,7 +131,7 @@ async function getDate(page) {
 
             li += `<li class="currentPage">${currentPage}</li>`;
 
-            for (i = 1; i < 4; i++) {
+            for (let i = 1; i < 4; i++) {
               li += `<li>${currentPage + i}</li>`;
             }
           } else if (currentPage === totalPages - 2) {
@@ -142,7 +142,7 @@ async function getDate(page) {
 
             li += `<li class="currentPage">${currentPage}</li>`;
 
-            for (i = 1; i < 3; i++) {
+            for (let i = 1; i < 3; i++) {
               li += `<li>${currentPage + i}</li>`;
             }
           } else if (currentPage === totalPages - 1) {
@@ -154,7 +154,7 @@ async function getDate(page) {
 
             li += `<li class="currentPage">${currentPage}</li>`;
 
-            for (i = 1; i < 2; i++) {
+            for (let i = 1; i < 2; i++) {
               li += `<li>${currentPage + i}</li>`;
             }
           } else if (currentPage === totalPages) {
@@ -167,9 +167,7 @@ async function getDate(page) {
 
             li += `<li class="currentPage">${currentPage}</li>`;
 
-            for (i = 1; i < 1; i++) {
-              li += `<li>${currentPage + i}</li>`;
-            }
+            li += `<li>${currentPage + 1}</li>`;
           }
         }
       }
