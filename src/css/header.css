@@ -31,11 +31,12 @@ header{
 .logo__icon{
     width: 24px;
     height: 24px;
-    border: 2px solid #818181;
+
+    /* border: 2px solid #818181; */
     margin-right: 10px;
     
 }
-.logo__icon use path{
+.logo__icon use{
     width: 24px;
     height: 24px;
     fill: #818181;
@@ -64,7 +65,7 @@ header{
     font-size: 12px;
     line-height: 14px;
     margin-right: 39px;
-
+    cursor: pointer;
     text-align: center;
     text-transform: uppercase;
 
@@ -79,29 +80,43 @@ header{
     font-weight: 500;
     font-size: 12px;
     line-height: 14px;
-
+    cursor: pointer;
     text-align: center;
     text-transform: uppercase;
 
     color: #FFFFFF;
 }
 .menu{
-    width: 100vw;
+    position: relative;
+    width: 340px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 .search{
+    
     width: 336px;
     border-bottom: 1px;
     background: none;
     border: none;
     border-bottom: 0.5px solid #FFFFFF ;
     color: #FFFFFF;
+    padding-left: 2px;
+    outline: 0px;
 }
-.send__img{
+.send{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: none;
+}
+.send__icon{
     width: 12px;
     height: 12px;
     background: none;
+    border: none;
 }
