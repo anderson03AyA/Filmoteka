@@ -121,7 +121,6 @@ async function getDate(page) {
         }
         //page Styles dots End
         else if (currentPage + 4 > totalPages) {
-          alert(currentPage);
           li += `<li>1</li>`;
           li += `<li>...</li>`;
 
