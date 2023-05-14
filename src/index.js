@@ -2,9 +2,7 @@ import { getGenres } from './genres';
 
 const ulPages = document.querySelector('.pagination__page');
 const searchInput = document.querySelector('.search');
-if (searchInput !== '') {
-  let id = searchInput.value;
-}
+
 const send = document.querySelector('.send');
 const div = document.querySelector('.movies-container');
 
@@ -227,6 +225,7 @@ send.addEventListener('click', async e => {
   e.preventDefault();
   if (searchInput.value === '') {
   } else {
+    let id = searchInput.value;
     ulPages.value = '';
     id = searchInput.value;
     API_URL = `https://api.themoviedb.org/3${CATEGORIES.querySearch}?api_key=${API_KEY}&query=${id}${CATEGORIES.basic}`;
