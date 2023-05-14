@@ -1,10 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+header {
+  width: 1200px;
+  background-color: rgb(1, 44, 44);
+}
+
 body {
-  width: 100vw;
   background-color: #E5E5E5;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
 }
 
 .section {
@@ -41,23 +42,40 @@ body {
   border-radius: 5px;
 }
 
-li {
-  background-color: aqua;
+.pagination__button {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
 }
-
-ul {
-  background-color: tan;
-  margin-top: 30px;
+.pagination__svg {
+  width: 16px;
+  height: 16px;
+}
+.pagination__page {
+  display: flex;
+  flex-direction: row;
+}
+.pagination__page li {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .currentPage {
-  background-color: red;
+  background-color: #FF6B08;
+  border-radius: 5px;
 }
 
 #pagination {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#footer-bg {
+  background-color: #F7F7F7;
 }
 
 @media screen and (max-width: 480px) {
