@@ -166,8 +166,6 @@ async function getDate(page) {
             li += `<li>${currentPage - 1}</li>`;
 
             li += `<li class="currentPage">${currentPage}</li>`;
-
-            li += `<li>${currentPage + 1}</li>`;
           }
         }
       }
