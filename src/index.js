@@ -2,7 +2,9 @@ import { getGenres } from './genres';
 
 const ulPages = document.querySelector('.pagination__page');
 const searchInput = document.querySelector('.search');
-let id = searchInput.value;
+if (searchInput !== '') {
+  let id = searchInput.value;
+}
 const send = document.querySelector('.send');
 const div = document.querySelector('.movies-container');
 

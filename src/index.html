@@ -12,10 +12,10 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/stylesSass.css" />
-    <link rel="stylesheet" href="./sass/style2.css"/>
-    <link rel="stylesheet" href="./css/header.css"/>
-    <link rel="stylesheet" href="./css/main.css"/>
-    <link rel="stylesheet" href="./css/footer.css"/>
+    <link rel="stylesheet" href="./sass/style2.css" />
+    <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/footer.css" />
 
     <title>Filmoteka-group4</title>
   </head>
@@ -24,38 +24,110 @@
       <header>
         <div class="controls">
           <div class="logo">
-            <svg class="logo__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M19.82 2H4.18C2.97602 2 2 2.97602 2 4.18V19.82C2 21.024 2.97602 22 4.18 22H19.82C21.024 22 22 21.024 22 19.82V4.18C22 2.97602 21.024 2 19.82 2Z" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M7 2V22" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M17 2V22" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M2 12H22" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M2 7H7" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M2 17H7" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M17 17H22" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M17 7H22" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg
+              class="logo__icon"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M19.82 2H4.18C2.97602 2 2 2.97602 2 4.18V19.82C2 21.024 2.97602 22 4.18 22H19.82C21.024 22 22 21.024 22 19.82V4.18C22 2.97602 21.024 2 19.82 2Z"
+                stroke="#818181"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M7 2V22"
+                stroke="#818181"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M17 2V22"
+                stroke="#818181"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2 12H22"
+                stroke="#818181"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2 7H7"
+                stroke="#818181"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2 17H7"
+                stroke="#818181"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M17 17H22"
+                stroke="#818181"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M17 7H22"
+                stroke="#818181"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
             </svg>
             <a class="logo__text">Filmoteka</a>
           </div>
           <div class="menu-home">
-            <a class="menu-home__item1 ">Home</a>
-            <a class="menu-home__item2 ">My library</a>
+            <a class="menu-home__item1">Home</a>
+            <a class="menu-home__item2">My library</a>
           </div>
         </div>
         <div class="menu">
           <nav class="cards">
             <form class="search-form" id="search-form">
               <input
-              value="miedo"
                 class="search"
-                type="text " required
+                type="text "
+                required
                 name="searchQuery"
                 autocomplete="off"
                 placeholder="Movie search"
               />
               <button class="send" type="submit">
-                <svg class="send__icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5.5 9.5C7.70914 9.5 9.5 7.70914 9.5 5.5C9.5 3.29086 7.70914 1.5 5.5 1.5C3.29086 1.5 1.5 3.29086 1.5 5.5C1.5 7.70914 3.29086 9.5 5.5 9.5Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M10.5 10.5L8.32495 8.32495" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg
+                  class="send__icon"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5.5 9.5C7.70914 9.5 9.5 7.70914 9.5 5.5C9.5 3.29086 7.70914 1.5 5.5 1.5C3.29086 1.5 1.5 3.29086 1.5 5.5C1.5 7.70914 3.29086 9.5 5.5 9.5Z"
+                    stroke="white"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M10.5 10.5L8.32495 8.32495"
+                    stroke="white"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
                 </svg>
               </button>
               <label class="label"></label>
@@ -73,14 +145,20 @@
 
         <div id="pagination">
           <button id="pagination__prev-page" class="pagination__button">
-            <img class="pagination__back pagination__svg" src="./images/arrow-left.svg" alt="search">
+            <img
+              class="pagination__back pagination__svg"
+              src="./images/arrow-left.svg"
+              alt="search"
+            />
           </button>
-              <ul class="pagination__page">
-                
-              </ul>
+          <ul class="pagination__page"></ul>
 
           <button id="pagination__next-page" class="pagination__button">
-             <img class="pagination__back pagination__svg" src="./images/arrow-right.svg" alt="search">
+            <img
+              class="pagination__back pagination__svg"
+              src="./images/arrow-right.svg"
+              alt="search"
+            />
           </button>
         </div>
       </main>
@@ -88,11 +166,20 @@
       <footer class="footer" id="footer-color">
         <div class="footer__container">
           <p class="footer__text">
-            © 2023 | All Rights Reserved |  
-            Developed with
-              <svg class="footer__icon" width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 12.88L6.02 11.9C2.38 8.68 0 6.51 0 3.85C0 1.68 1.68 0 3.85 0C5.04 0 6.23 0.56 7 1.47C7.77 0.56 8.96 0 10.15 0C12.32 0 14 1.68 14 3.85C14 6.51 11.62 8.68 7.98 11.9L7 12.88Z" fill="#FF6B08"/>
-              </svg>
+            © 2023 | All Rights Reserved | Developed with
+            <svg
+              class="footer__icon"
+              width="14"
+              height="13"
+              viewBox="0 0 14 13"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7 12.88L6.02 11.9C2.38 8.68 0 6.51 0 3.85C0 1.68 1.68 0 3.85 0C5.04 0 6.23 0.56 7 1.47C7.77 0.56 8.96 0 10.15 0C12.32 0 14 1.68 14 3.85C14 6.51 11.62 8.68 7.98 11.9L7 12.88Z"
+                fill="#FF6B08"
+              />
+            </svg>
             by<a class="footer__link">GoIT Students</a>
           </p>
         </div>
