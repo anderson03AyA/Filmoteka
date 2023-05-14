@@ -1,6 +1,6 @@
 import { getGenres } from './genres';
 
-const ulPages = document.querySelector('.ul-pages');
+const ulPages = document.querySelector('.pagination__page');
 const searchInput = document.querySelector('.search');
 let id = searchInput.value;
 const send = document.querySelector('.send');
@@ -43,13 +43,50 @@ async function getDate(page) {
       let indice = 0;
       totalPages = data.total_pages;
       let li = ``;
-      //pages style
-      if (totalPages < 10) {
+      //page Styles dots End
+      if (currentPage + 4 > totalPages) {
+        if (currentPage + 4 == totalPages) {
+          alert(`${currentPage+4}`)
+          li += `<li>${currentPage + 1}</li>`;
+          li += `<li>${currentPage + 2}</li>`;
+          li += `<li>${currentPage + 3}</li>`;
+          for (let i = currentPage; i < currentPage + 5; i++) {
+            if (i === currentPage) {
+              li += `<li class="currentPage">${i}</li>`;
+            } else {
+              li += `<li>${i}</li>`;
+            }
+          }
+          li += `<li>...</li>`;
+          //page end
+          li += `<li>${totalPages}</li>`;
+        }
+
+
+
+        else if (currentPage + 3 == totalPages) {
+          li += `<li>${currentPage + 1}</li>`;
+          li += `<li>${currentPage + 2}</li>`;
+          for (let i = currentPage; i < currentPage + 5; i++) {
+            if (i === currentPage) {
+              li += `<li class="currentPage">${i}</li>`;
+            } else {
+              li += `<li>${i}</li>`;
+            }
+          }
+          li += `<li>...</li>`;
+          //page end
+          li += `<li>${totalPages}</li>`;
+        }
+      }
+      //pages style with dots
+      else if (totalPages < 10) {
         for (let i = 0; i < totalPages; i++) {
           li += `<li> ${i + 1}</li>`;
         }
       } else {
-        if (currentPage >= 4) {
+        //for handle dots
+        if (currentPage > 4) {
           //page start
           li += `<li>1</li>`;
           li += `<li>...</li>`;
@@ -64,9 +101,8 @@ async function getDate(page) {
           li += `<li>...</li>`;
           //page end
           li += `<li>${totalPages}</li>`;
-        }
-        else if (currentPage == 3) {
-          
+        } else if (currentPage == 4) {
+          li += `<li>${currentPage - 3}</li>`;
           li += `<li>${currentPage - 2}</li>`;
           li += `<li>${currentPage - 1}</li>`;
           for (let i = currentPage; i < currentPage + 5; i++) {
@@ -79,35 +115,45 @@ async function getDate(page) {
           li += `<li>...</li>`;
           //page end
           li += `<li>${totalPages}</li>`;
-        }
-        else if (currentPage == 2) {
-  
-           li += `<li>${currentPage - 1}</li>`;
+        } else if (currentPage == 3) {
+          li += `<li>${currentPage - 2}</li>`;
+          li += `<li>${currentPage - 1}</li>`;
+          for (let i = currentPage; i < currentPage + 5; i++) {
+            if (i === currentPage) {
+              li += `<li class="currentPage">${i}</li>`;
+            } else {
+              li += `<li>${i}</li>`;
+            }
+          }
+          li += `<li>...</li>`;
+          //page end
+          li += `<li>${totalPages}</li>`;
+        } else if (currentPage == 2) {
+          li += `<li>${currentPage - 1}</li>`;
           for (let i = currentPage; i < currentPage + 6; i++) {
-             if (i === currentPage) {
-               li += `<li class="currentPage">${i}</li>`;
-             } else {
-               li += `<li>${i}</li>`;
-             }
+            if (i === currentPage) {
+              li += `<li class="currentPage">${i}</li>`;
+            } else {
+              li += `<li>${i}</li>`;
+            }
           }
-            li += `<li>...</li>`;
-            //page end
-            li += `<li>${totalPages}</li>`;
-        }
-        else if (currentPage == 1) {
-          for (let i = currentPage; i < currentPage + 7; i++){
-             if (i === currentPage) {
-               li += `<li class="currentPage">${i}</li>`;
-             } else {
-               li += `<li>${i}</li>`;
-             }
+          li += `<li>...</li>`;
+          //page end
+          li += `<li>${totalPages}</li>`;
+        } else if (currentPage == 1) {
+          for (let i = currentPage; i < currentPage + 7; i++) {
+            if (i === currentPage) {
+              li += `<li class="currentPage">${i}</li>`;
+            } else {
+              li += `<li>${i}</li>`;
+            }
           }
-           li += `<li>...</li>`;
-           //page end
-           li += `<li>${totalPages}</li>`;
+          li += `<li>...</li>`;
+          //page end
+          li += `<li>${totalPages}</li>`;
         }
-        
       }
+
       ulPages.innerHTML = li;
 
       const movieCards = movies.map(movie => {
