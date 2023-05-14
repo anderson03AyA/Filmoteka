@@ -1,4 +1,7 @@
+import { event } from 'jquery';
 import { getGenres } from './genres';
+import { openModal, closeModal } from './movieModal.js';
+import {generatePages} from './pages'
 
 const ulPages = document.querySelector('.pagination__page');
 const searchInput = document.querySelector('.search');
@@ -41,135 +44,9 @@ async function getDate(page) {
       const movies = data.results;
       let indice = 0;
       totalPages = data.total_pages;
-      let li = ``;
+      
       //pages style with dots
-      if (totalPages < 10) {
-        for (let i = 0; i < totalPages; i++) {
-          if (i + 1 === currentPage) {
-            li += `<li class="currentPage"> ${i + 1}</li>`;
-          } else {
-            li += `<li> ${i + 1}</li>`;
-          }
-        }
-      } else {
-        //for handle dots
-        if (currentPage > 4 && currentPage <= totalPages - 4) {
-          //page start
-          li += `<li>1</li>`;
-          li += `<li>...</li>`;
-          //2 antes del page
-          li += `<li>${currentPage - 2}</li>`;
-          li += `<li>${currentPage - 1}</li>`;
-          //page current
-          li += `<li  class="currentPage">${currentPage}</li>`;
-          //next2 page
-          li += `<li>${currentPage + 1}</li>`;
-          li += `<li>${currentPage + 2}</li>`;
-          li += `<li>...</li>`;
-          //page end
-          li += `<li>${totalPages}</li>`;
-        } else if (currentPage == 4) {
-          li += `<li>${currentPage - 3}</li>`;
-          li += `<li>${currentPage - 2}</li>`;
-          li += `<li>${currentPage - 1}</li>`;
-          for (let i = currentPage; i < currentPage + 5; i++) {
-            if (i === currentPage) {
-              li += `<li class="currentPage">${i}</li>`;
-            } else {
-              li += `<li>${i}</li>`;
-            }
-          }
-          li += `<li>...</li>`;
-          //page end
-          li += `<li>${totalPages}</li>`;
-        } else if (currentPage == 3) {
-          li += `<li>${currentPage - 2}</li>`;
-          li += `<li>${currentPage - 1}</li>`;
-          for (let i = currentPage; i < currentPage + 5; i++) {
-            if (i === currentPage) {
-              li += `<li class="currentPage">${i}</li>`;
-            } else {
-              li += `<li>${i}</li>`;
-            }
-          }
-          li += `<li>...</li>`;
-          //page end
-          li += `<li>${totalPages}</li>`;
-        } else if (currentPage == 2) {
-          li += `<li>${currentPage - 1}</li>`;
-          for (let i = currentPage; i < currentPage + 6; i++) {
-            if (i === currentPage) {
-              li += `<li class="currentPage">${i}</li>`;
-            } else {
-              li += `<li>${i}</li>`;
-            }
-          }
-          li += `<li>...</li>`;
-          //page end
-          li += `<li>${totalPages}</li>`;
-        } else if (currentPage == 1) {
-          for (let i = currentPage; i < currentPage + 7; i++) {
-            if (i === currentPage) {
-              li += `<li class="currentPage">${i}</li>`;
-            } else {
-              li += `<li>${i}</li>`;
-            }
-          }
-          li += `<li>...</li>`;
-          //page end
-          li += `<li>${totalPages}</li>`;
-        }
-        //page Styles dots End
-        else if (currentPage + 4 > totalPages) {
-          li += `<li>1</li>`;
-          li += `<li>...</li>`;
-
-          if (currentPage === totalPages - 3) {
-            li += `<li>${currentPage - 3}</li>`;
-            li += `<li>${currentPage - 2}</li>`;
-            li += `<li>${currentPage - 1}</li>`;
-
-            li += `<li class="currentPage">${currentPage}</li>`;
-
-            for (let i = 1; i < 4; i++) {
-              li += `<li>${currentPage + i}</li>`;
-            }
-          } else if (currentPage === totalPages - 2) {
-            li += `<li>${currentPage - 4}</li>`;
-            li += `<li>${currentPage - 3}</li>`;
-            li += `<li>${currentPage - 2}</li>`;
-            li += `<li>${currentPage - 1}</li>`;
-
-            li += `<li class="currentPage">${currentPage}</li>`;
-
-            for (let i = 1; i < 3; i++) {
-              li += `<li>${currentPage + i}</li>`;
-            }
-          } else if (currentPage === totalPages - 1) {
-            li += `<li>${currentPage - 5}</li>`;
-            li += `<li>${currentPage - 4}</li>`;
-            li += `<li>${currentPage - 3}</li>`;
-            li += `<li>${currentPage - 2}</li>`;
-            li += `<li>${currentPage - 1}</li>`;
-
-            li += `<li class="currentPage">${currentPage}</li>`;
-
-            for (let i = 1; i < 2; i++) {
-              li += `<li>${currentPage + i}</li>`;
-            }
-          } else if (currentPage === totalPages) {
-            li += `<li>${currentPage - 6}</li>`;
-            li += `<li>${currentPage - 5}</li>`;
-            li += `<li>${currentPage - 4}</li>`;
-            li += `<li>${currentPage - 3}</li>`;
-            li += `<li>${currentPage - 2}</li>`;
-            li += `<li>${currentPage - 1}</li>`;
-
-            li += `<li class="currentPage">${currentPage}</li>`;
-          }
-        }
-      }
-
+      const li = generatePages(currentPage, totalPages)
       ulPages.innerHTML = li;
 
       const movieCards = movies.map(movie => {
@@ -178,8 +55,6 @@ async function getDate(page) {
         let result = resultsGenre.filter(filtro =>
           idGenres.includes(filtro.id)
         );
-        console.log(result);
-
         const title = movie.title;
         const releaseYear = movie.release_date;
         const moviePoster = `${baseImageUrl}w500${movie.poster_path}`;
@@ -188,8 +63,8 @@ async function getDate(page) {
         let resultGenre = result.map(genre => genre.name);
         return `<div class="photo-card">
           <div class="info">
-            <a href="${moviePoster}" class="info__poster">
-              <img class="info__poster--img" src="${moviePoster}" alt="" loading="lazy" width="100px" height="100px" />
+            <a onclick="openModal('${movie.id}')" class="info__poster">
+              <img class="info__poster--img" src="${moviePoster}" alt="" loading="lazy" width="100px" height="100px" id= "info__poster--img"/>
             </a>
               <h3 class="info__title">
               <strong class="title">${title}</strong>
@@ -206,10 +81,9 @@ async function getDate(page) {
           </div>
         </div>`;
       });
-
       div.innerHTML = movieCards.join('');
-
       totalPages = data.total_pages;
+
     } else {
       // No se encontraron resultados de búsqueda
       console.log('No se encontraron resultados de búsqueda.');
@@ -248,3 +122,19 @@ document
       await getDate(currentPage);
     }
   });
+ulPages.removeEventListener('click', handlePageClick); // Remover el evento de clic existente
+
+// Definir una función separada para manejar el evento de clic
+function handlePageClick(event) {
+  if (event.target.tagName === 'LI') {
+    const clickedValue = parseInt(event.target.innerText);
+    currentPage = clickedValue;
+    console.log(currentPage);
+    if (currentPage !== '...') {
+      event.stopPropagation();
+      getDate(currentPage);
+    }
+  }
+}
+
+ulPages.addEventListener('click', handlePageClick); // Agregar el evento de clic actualizado
