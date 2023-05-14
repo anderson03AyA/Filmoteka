@@ -1,9 +1,9 @@
 import { getGenres } from './genres';
 import { openModal, closeModal } from './movieModal.js';
 
-const ulPages = document.querySelector('.ul-pages');
+const ulPages = document.querySelector('.pagination__page');
 const searchInput = document.querySelector('.search');
-let id = searchInput.value;
+
 const send = document.querySelector('.send');
 const div = document.querySelector('.movies-container');
 
@@ -21,7 +21,6 @@ const baseImageUrl = 'https://image.tmdb.org/t/p/';
 
 let currentPage = 1;
 let totalPages = 1;
-const resultsPerPage = 20;
 let resultsGenre = [];
 
 const listGenres = getGenres();
@@ -44,13 +43,18 @@ async function getDate(page) {
       let indice = 0;
       totalPages = data.total_pages;
       let li = ``;
-      //pages style
+      //pages style with dots
       if (totalPages < 10) {
         for (let i = 0; i < totalPages; i++) {
-          li += `<li> ${i + 1}</li>`;
+          if (i + 1 === currentPage) {
+            li += `<li class="currentPage"> ${i + 1}</li>`;
+          } else {
+            li += `<li> ${i + 1}</li>`;
+          }
         }
       } else {
-        if (currentPage >= 4) {
+        //for handle dots
+        if (currentPage > 4 && currentPage <= totalPages - 4) {
           //page start
           li += `<li>1</li>`;
           li += `<li>...</li>`;
@@ -65,9 +69,8 @@ async function getDate(page) {
           li += `<li>...</li>`;
           //page end
           li += `<li>${totalPages}</li>`;
-        }
-        else if (currentPage == 3) {
-
+        } else if (currentPage == 4) {
+          li += `<li>${currentPage - 3}</li>`;
           li += `<li>${currentPage - 2}</li>`;
           li += `<li>${currentPage - 1}</li>`;
           for (let i = currentPage; i < currentPage + 5; i++) {
@@ -80,9 +83,20 @@ async function getDate(page) {
           li += `<li>...</li>`;
           //page end
           li += `<li>${totalPages}</li>`;
-        }
-        else if (currentPage == 2) {
-
+        } else if (currentPage == 3) {
+          li += `<li>${currentPage - 2}</li>`;
+          li += `<li>${currentPage - 1}</li>`;
+          for (let i = currentPage; i < currentPage + 5; i++) {
+            if (i === currentPage) {
+              li += `<li class="currentPage">${i}</li>`;
+            } else {
+              li += `<li>${i}</li>`;
+            }
+          }
+          li += `<li>...</li>`;
+          //page end
+          li += `<li>${totalPages}</li>`;
+        } else if (currentPage == 2) {
           li += `<li>${currentPage - 1}</li>`;
           for (let i = currentPage; i < currentPage + 6; i++) {
             if (i === currentPage) {
@@ -94,8 +108,7 @@ async function getDate(page) {
           li += `<li>...</li>`;
           //page end
           li += `<li>${totalPages}</li>`;
-        }
-        else if (currentPage == 1) {
+        } else if (currentPage == 1) {
           for (let i = currentPage; i < currentPage + 7; i++) {
             if (i === currentPage) {
               li += `<li class="currentPage">${i}</li>`;
@@ -107,8 +120,57 @@ async function getDate(page) {
           //page end
           li += `<li>${totalPages}</li>`;
         }
+        //page Styles dots End
+        else if (currentPage + 4 > totalPages) {
+          li += `<li>1</li>`;
+          li += `<li>...</li>`;
 
+          if (currentPage === totalPages - 3) {
+            li += `<li>${currentPage - 3}</li>`;
+            li += `<li>${currentPage - 2}</li>`;
+            li += `<li>${currentPage - 1}</li>`;
+
+            li += `<li class="currentPage">${currentPage}</li>`;
+
+            for (let i = 1; i < 4; i++) {
+              li += `<li>${currentPage + i}</li>`;
+            }
+          } else if (currentPage === totalPages - 2) {
+            li += `<li>${currentPage - 4}</li>`;
+            li += `<li>${currentPage - 3}</li>`;
+            li += `<li>${currentPage - 2}</li>`;
+            li += `<li>${currentPage - 1}</li>`;
+
+            li += `<li class="currentPage">${currentPage}</li>`;
+
+            for (let i = 1; i < 3; i++) {
+              li += `<li>${currentPage + i}</li>`;
+            }
+          } else if (currentPage === totalPages - 1) {
+            li += `<li>${currentPage - 5}</li>`;
+            li += `<li>${currentPage - 4}</li>`;
+            li += `<li>${currentPage - 3}</li>`;
+            li += `<li>${currentPage - 2}</li>`;
+            li += `<li>${currentPage - 1}</li>`;
+
+            li += `<li class="currentPage">${currentPage}</li>`;
+
+            for (let i = 1; i < 2; i++) {
+              li += `<li>${currentPage + i}</li>`;
+            }
+          } else if (currentPage === totalPages) {
+            li += `<li>${currentPage - 6}</li>`;
+            li += `<li>${currentPage - 5}</li>`;
+            li += `<li>${currentPage - 4}</li>`;
+            li += `<li>${currentPage - 3}</li>`;
+            li += `<li>${currentPage - 2}</li>`;
+            li += `<li>${currentPage - 1}</li>`;
+
+            li += `<li class="currentPage">${currentPage}</li>`;
+          }
+        }
       }
+
       ulPages.innerHTML = li;
 
       const movieCards = movies.map(movie => {
@@ -156,21 +218,16 @@ async function getDate(page) {
   }
 }
 
-function updatePagination() {
-  // Actualizar estado de la paginación
-  document.getElementById('current-page').textContent = currentPage;
-  document.getElementById('total-pages').textContent = totalPages;
-}
-
 send.addEventListener('click', async e => {
   e.preventDefault();
   if (searchInput.value === '') {
   } else {
+    let id = searchInput.value;
+    ulPages.value = '';
     id = searchInput.value;
     API_URL = `https://api.themoviedb.org/3${CATEGORIES.querySearch}?api_key=${API_KEY}&query=${id}${CATEGORIES.basic}`;
     currentPage = 1;
     await getDate(currentPage);
-    updatePagination();
   }
 });
 
@@ -180,7 +237,6 @@ document
     if (currentPage > 1) {
       currentPage--;
       await getDate(currentPage);
-      updatePagination();
     }
   });
 document
@@ -189,6 +245,5 @@ document
     if (currentPage < totalPages) {
       currentPage++;
       await getDate(currentPage);
-      updatePagination();
     }
   });
