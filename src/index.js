@@ -45,7 +45,7 @@ async function getDate(page) {
       //pages style with dots
       if (totalPages < 10) {
         for (let i = 0; i < totalPages; i++) {
-          if (i+1 === currentPage) {
+          if (i + 1 === currentPage) {
             li += `<li class="currentPage"> ${i + 1}</li>`;
           } else {
             li += `<li> ${i + 1}</li>`;
@@ -53,7 +53,7 @@ async function getDate(page) {
         }
       } else {
         //for handle dots
-        if (currentPage > 4) {
+        if (currentPage > 4 && currentPage <= totalPages - 4) {
           //page start
           li += `<li>1</li>`;
           li += `<li>...</li>`;
@@ -121,6 +121,7 @@ async function getDate(page) {
         }
         //page Styles dots End
         else if (currentPage + 4 > totalPages) {
+          alert(currentPage);
           li += `<li>1</li>`;
           li += `<li>...</li>`;
 
@@ -173,7 +174,6 @@ async function getDate(page) {
           }
         }
       }
-     
 
       ulPages.innerHTML = li;
 
@@ -224,13 +224,12 @@ async function getDate(page) {
   }
 }
 
-
 send.addEventListener('click', async e => {
   e.preventDefault();
   if (searchInput.value === '') {
   } else {
-    ulPages.value=""
-    li = ""
+    ulPages.value = '';
+    li = '';
     id = searchInput.value;
     API_URL = `https://api.themoviedb.org/3${CATEGORIES.querySearch}?api_key=${API_KEY}&query=${id}${CATEGORIES.basic}`;
     currentPage = 1;
