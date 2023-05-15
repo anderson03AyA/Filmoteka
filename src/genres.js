@@ -1,6 +1,5 @@
-import { myValue } from "./key"; './key'
+import { API_KEY } from "./config";
 export const getGenres = async () => {
-const API_KEY = myValue;
 
   const options = {
     method: 'GET',
