@@ -1,7 +1,8 @@
 import { event } from 'jquery';
 import { getGenres } from './genres';
 import { openModal, closeModal } from './movieModal.js';
-import {generatePages} from './pages'
+import { generatePages } from './pages'
+import Swal from 'sweetalert2';
 
 const ulPages = document.querySelector('.pagination__page');
 const searchInput = document.querySelector('.search');
@@ -37,6 +38,7 @@ async function getDate(page) {
     const data = await response.json();
 
     console.log(data);
+    Swal.fire('Felicidades!', `Se han encontrado ${data.total_results} peliculas`, 'success');
 
     // Verificar si se encontraron resultados de búsqueda
     if (data.results && data.results.length > 0) {
@@ -86,10 +88,20 @@ async function getDate(page) {
 
     } else {
       // No se encontraron resultados de búsqueda
-      console.log('No se encontraron resultados de búsqueda.');
+      Swal.fire(
+        'Cuidado!',
+        'No se encontraron resultados de búsqueda.',
+        'question'
+      );
+      
     }
   } catch (error) {
-    console.log('Ha ocurrido un error:', error);
+    //console.log('Ha ocurrido un error:', error);
+    Swal.fire(
+      'Cuidado!',
+      'Ha ocurrido un error',
+      'error'
+    );
   }
 }
 
