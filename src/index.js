@@ -1,5 +1,6 @@
 import { API_KEY, API_URL, CATEGORIES } from './config';
 import { getGenres } from './genres';
+import Swal from 'sweetalert2';
 import { generatePages } from './pages';
 import { MovieCard } from './movieCard';
 
@@ -25,6 +26,7 @@ async function getMovies(page) {
 
 function showMovies(data) {
   if (data.results && data.results.length > 0) {
+    Swal.fire('Felicidades!', `Se han encontrado ${data.total_results} peliculas`, 'success');
     const movies = data.results;
     totalPages = data.total_pages;
     const li = generatePages(currentPage, totalPages);
@@ -41,11 +43,16 @@ function showMovies(data) {
         posterPath: movie.poster_path,
         genres: genres,
       });
+
     });
     div.innerHTML = movieCards.join('');
     totalPages = data.total_pages;
   } else {
-    console.log('No se encontraron resultados de búsqueda.');
+    Swal.fire(
+        'Cuidado!',
+        'No se encontraron resultados de búsqueda.',
+        'question'
+      );
   }
 }
 
