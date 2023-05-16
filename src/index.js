@@ -1,5 +1,6 @@
 import { API_KEY, API_URL, CATEGORIES } from './config';
 import { getGenres } from './genres';
+import Swal from 'sweetalert2';
 import { generatePages } from './pages';
 import { MovieCard } from './movieCard';
 
@@ -8,6 +9,7 @@ const searchInput = document.querySelector('.search');
 const send = document.querySelector('.send');
 const div = document.querySelector('.movies-container');
 
+let modalAlert;
 let currentPage = 1;
 let totalPages = 1;
 let resultsGenre = [];
@@ -25,6 +27,12 @@ async function getMovies(page) {
 
 function showMovies(data) {
   if (data.results && data.results.length > 0) {
+    if (modalAlert == 0) {
+      Swal.fire('Felicidades!', `Se han encontrado ${data.total_results} peliculas`, 'success');
+      modalAlert = modalAlert + 1;
+    } else {
+      modalAlert = 1;
+    }
     const movies = data.results;
     totalPages = data.total_pages;
     const li = generatePages(currentPage, totalPages);
@@ -41,14 +49,18 @@ function showMovies(data) {
         posterPath: movie.poster_path,
         genres: genres,
       });
+
     });
     div.innerHTML = movieCards.join('');
     totalPages = data.total_pages;
   } else {
-    console.log('No se encontraron resultados de búsqueda.');
-  }
+    Swal.fire(
+        'Oh no!',
+        'No se encontraron resultados de búsqueda.',
+        'error'
+      );
+  } 
 }
-
 async function showMoviesByPage(page) {
   const data = await getMovies(page);
   showMovies(data);
@@ -57,8 +69,14 @@ async function showMoviesByPage(page) {
 send.addEventListener('click', async e => {
   e.preventDefault();
   if (searchInput.value === '') {
+    Swal.fire(
+      'Cuidado!',
+      'Introduce una busqueda',
+      'question'
+    );
     return;
   }
+  modalAlert = 0;
   currentPage = 1;
   await showMoviesByPage(currentPage);
 });
