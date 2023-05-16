@@ -1,4 +1,4 @@
-import { myValue } from "./key"; './key'
+import { API_KEY } from "./config";
 
 const addToWatchedBtn = document.getElementById('add-to-watched--btn');
 const addToQueueBtn = document.getElementById('add-to-queue--btn');
@@ -24,7 +24,6 @@ window.openModal = function (movie) {
 
 function obtainMovieData (movieID) {
     const baseImageUrl = 'https://image.tmdb.org/t/p/';
-    const apiKey = myValue; 
     const movieId = movieID; // ID de la película que deseas buscar
     const language = 'en'; // Idioma en el que deseas recibir la respuesta
 
@@ -37,10 +36,9 @@ function obtainMovieData (movieID) {
     const about = document.getElementById('movie-modal-about');
 
 
-fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=${language}`)
+fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=${language}`)
   .then(response => response.json())
   .then(data => {
-    console.log(data);
     img.src = `${baseImageUrl}w500${data.poster_path}`;
     title.textContent = data.title;
     votes.textContent = data.vote_average + ' / ' + data.vote_count;

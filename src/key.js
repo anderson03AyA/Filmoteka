@@ -1,1 +1,0 @@
-export const myValue = '9aaec7b70164094369485674dba76f62';
