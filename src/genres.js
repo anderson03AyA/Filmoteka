@@ -1,5 +1,5 @@
+import { API_KEY } from "./config";
 export const getGenres = async () => {
-const API_KEY = '9aaec7b70164094369485674dba76f62';
 
   const options = {
     method: 'GET',
