@@ -18,11 +18,11 @@ window.openModal = function (movie) {
     
     const modal = document.getElementById('movie-modal');
     modal.style.display = 'flex';
-    obtainMovieData(movie)
+    getMovieData(movie)
   
 }
 
-function obtainMovieData (movieID) {
+ function getMovieData (movieID) {
     const baseImageUrl = 'https://image.tmdb.org/t/p/';
     const movieId = movieID; // ID de la película que deseas buscar
     const language = 'en'; // Idioma en el que deseas recibir la respuesta
