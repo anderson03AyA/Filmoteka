@@ -1,7 +1,7 @@
 import { API_KEY, API_URL, CATEGORIES } from './config';
 import { getGenres } from './genres';
 import Swal from 'sweetalert2';
-import { generatePages } from './pages';
+import { generatePages } from './pagination';
 import { MovieCard } from './movieCard';
 
 const ulPages = document.querySelector('.pagination__page');
@@ -20,7 +20,9 @@ listGenres.then(results => {
 });
 
 async function getMovies(page) {
-  const response = await fetch(`${API_URL}${CATEGORIES.querySearch}?api_key=${API_KEY}&query=${searchInput.value}${CATEGORIES.basic}&page=${page}`);
+  const response = await fetch(
+    `${API_URL}${CATEGORIES.querySearch}?api_key=${API_KEY}&query=${searchInput.value}${CATEGORIES.basic}&page=${page}`
+  );
   const data = await response.json();
   return data;
 }
@@ -28,7 +30,11 @@ async function getMovies(page) {
 function showMovies(data) {
   if (data.results && data.results.length > 0) {
     if (modalAlert == 0) {
-      Swal.fire('Felicidades!', `Se han encontrado ${data.total_results} peliculas`, 'success');
+      Swal.fire(
+        'Felicidades!',
+        `Se han encontrado ${data.total_results} peliculas`,
+        'success'
+      );
       modalAlert = modalAlert + 1;
     } else {
       modalAlert = 1;
@@ -37,11 +43,9 @@ function showMovies(data) {
     totalPages = data.total_pages;
     const li = generatePages(currentPage, totalPages);
     ulPages.innerHTML = li;
-    const movieCards = movies.map((movie) => {
+    const movieCards = movies.map(movie => {
       const idGenres = movie.genre_ids;
-      const genres = resultsGenre.filter((genre) =>
-        idGenres.includes(genre.id)
-      );
+      const genres = resultsGenre.filter(genre => idGenres.includes(genre.id));
       return MovieCard({
         id: movie.id,
         title: movie.title,
@@ -49,18 +53,33 @@ function showMovies(data) {
         posterPath: movie.poster_path,
         genres: genres,
       });
-
     });
     div.innerHTML = movieCards.join('');
     totalPages = data.total_pages;
   } else {
-    Swal.fire(
-        'Oh no!',
-        'No se encontraron resultados de búsqueda.',
-        'error'
-      );
-  } 
+    Swal.fire('Oh no!', 'No se encontraron resultados de búsqueda.', 'error');
+  }
 }
+
+// ----------------------------------------
+
+// ----------------------------------------
+async function getTrending() {
+  const responseTrending = await fetch(
+    `${API_URL}${CATEGORIES.trending}?api_key=${API_KEY}`
+  );
+  const data = await responseTrending.json();
+  return data;
+}
+async function showTrending() {
+  const data = await getTrending();
+  console.log('trending' + data.results);
+  showMovies(data);
+}
+showTrending();
+// ----------------------------------------
+
+// ----------------------------------------
 async function showMoviesByPage(page) {
   const data = await getMovies(page);
   showMovies(data);
@@ -69,11 +88,7 @@ async function showMoviesByPage(page) {
 send.addEventListener('click', async e => {
   e.preventDefault();
   if (searchInput.value === '') {
-    Swal.fire(
-      'Cuidado!',
-      'Introduce una busqueda',
-      'question'
-    );
+    Swal.fire('Cuidado!', 'Introduce una busqueda', 'question');
     return;
   }
   modalAlert = 0;
@@ -102,11 +117,13 @@ document
 // Definir una función separada para manejar el evento de clic
 function handlePageClick(event) {
   if (event.target.tagName === 'LI') {
-    const clickedValue = parseInt(event.target.innerText);
-    currentPage = clickedValue;
-    if (currentPage !== '...') {
+    const clickedValue = event.target.innerText;
+    const clickedValueInt = parseInt(clickedValue);
+    if (clickedValue === '...') {
+    } else {
+      currentPage = clickedValueInt;
       event.stopPropagation();
-       showMoviesByPage(currentPage);
+      showMoviesByPage(currentPage);
     }
   }
 }
