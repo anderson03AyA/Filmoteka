@@ -253,7 +253,9 @@ header{
 
 }
 @media screen and (max-width:320px){
-    
+    html{
+       width: 100%;
+    }
     .container{
         
         width: 100%;
@@ -266,9 +268,10 @@ header{
         height: 398px;
     }
     .controls{
-        width: 100%;
+        width: 100vw;
     }
     header{
+        width: 100%;
         background-size: cover;
         background-position: center center;
     }
@@ -282,8 +285,16 @@ header{
     .menu{
         margin-left: -30%;
     }
+    .menu-home{
+        position: relative;
+        top: 3px;
+        right: 7vw;
+    }
     .menu2__button{
         min-width: 130px ;
+    }
+    .menu-home__item1{
+        margin-right: 10%;
     }
     .menu-home__item1{
         margin-right: 10%;
