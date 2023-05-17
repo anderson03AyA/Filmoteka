@@ -1,5 +1,5 @@
-import { API_KEY } from "./config";
-import { generatePages } from "./pagination";
+import { API_KEY } from './config';
+import { generatePages } from './pagination';
 
 const watchedBtn = document.getElementById('watched-movies--btn');
 const watchedContainer = document.getElementById('movies-container');
@@ -11,17 +11,18 @@ function renderWatchedMovies() {
   let moviesHTML = '';
 
   const fetchPromises = watchedMoviesList.map(movieID => {
-    return fetch(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${API_KEY}&language=en`)
-      .then(response => response.json());
+    return fetch(
+      `https://api.themoviedb.org/3/movie/${movieID}?api_key=${API_KEY}&language=en`
+    ).then(response => response.json());
   });
 
-const total_pages = (watchedMoviesLength) => {
-  return watchedMoviesLength >= 20 ? Math.ceil(watchedMoviesLength / 20) : 1;
-};
+  const total_pages = watchedMoviesLength => {
+    return watchedMoviesLength >= 20 ? Math.ceil(watchedMoviesLength / 20) : 1;
+  };
+  fetchMovies(1);
 
-  fetchMovies(1)
   function fetchMovies(currentPage) {
-   let moviesHTML = '';
+    let moviesHTML = '';
     Promise.all(fetchPromises)
       .then(moviesData => {
         //get all for pagination---------------------
@@ -33,7 +34,7 @@ const total_pages = (watchedMoviesLength) => {
         const pageSize = 20; // Tamaño de cada página
         const startIndex =
           currentPage === 1 ? 1 : (currentPage - 1) * pageSize + 1;
-        const endIndex = Math.min(currentPage*pageSize, moviesData.length);
+        const endIndex = Math.min(currentPage * pageSize, moviesData.length);
 
         for (let i = startIndex; i < endIndex; i++) {
           const data = moviesData[i];
@@ -64,17 +65,17 @@ const total_pages = (watchedMoviesLength) => {
       .catch(error => console.error(error));
   }
 
-function handlePageClick(event) {
-  if (event.target.tagName === 'LI') {
-    const clickedValue = event.target.innerText;
-    const clickedValueInt = parseInt(clickedValue);
-    if (clickedValue === '...') {
-    } else {
-      currentPage = clickedValueInt;
-      event.stopPropagation();
-      fetchMovies(currentPage);
+  function handlePageClick(event) {
+    if (event.target.tagName === 'LI') {
+      const clickedValue = event.target.innerText;
+      const clickedValueInt = parseInt(clickedValue);
+      if (clickedValue === '...') {
+      } else {
+        currentPage = clickedValueInt;
+        event.stopPropagation();
+        fetchMovies(currentPage);
+      }
     }
   }
+  ulPages.addEventListener('click', handlePageClick); // Agregar el evento de clic actualizado
 }
-
-ulPages.addEventListener('click', handlePageClick); // Agregar el evento de clic actualizado
