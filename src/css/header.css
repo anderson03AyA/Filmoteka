@@ -131,7 +131,7 @@ header{
 }
 .menu{
     position: relative;
-    width: 250px;
+    max-width: 336px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -211,13 +211,25 @@ header{
 }
                                         /* responsive */
  
-@media screen and (max-width:1200px){
+/* @media screen and (max-width:1200px){
     .container{
         width: 100vw;
     }
+} */
+
+@media screen and (min-width:1024px){
+    .container{
+        width: 100vw;
+    }
+    .movies-container{
+        margin-right: 5%;
+    }
+    .send{
+        right: 0;
+    }
 }
 
-@media screen and (max-width:768.5px){
+@media screen and (min-width:760px)AND (max-width:1024px){
     .container{
         
         width: 100vw;
@@ -225,10 +237,7 @@ header{
         justify-content: center;
         flex-direction: column;
     }
-    img{
-        width: 40%;
-        height: 398px;
-    }
+    
     header{
         width: 100vw;
     }
@@ -236,37 +245,35 @@ header{
         width: 100vw;
     }
     .menu-home{
-        margin-right: 5%;
+        margin-right: 8%;
         
     }
-    .search{
-        width: 150%;
+    .logo{
+        margin-left: 8%;
     }
     .menu{
-        margin-left: -15%;
+    
+        width: 33vw;
     }
-    .movies-container {
+    .search{
         
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        width: 33vw;
     }
-
+    .send{
+        right: 0;
+    }
+    
 }
-@media screen and (max-width:320px){
-    html{
-       width: 100%;
-    }
+@media screen and (min-width:320px)AND (max-width:760px){
+
     .container{
-        
+        position: relative;
         width: 100%;
         display: flex;
         justify-content: center;
         flex-direction: column;
     }
-    img{
-        width: 280px;
-        height: 398px;
-    }
+    
     .controls{
         width: 100vw;
     }
@@ -274,6 +281,9 @@ header{
         width: 100%;
         background-size: cover;
         background-position: center center;
+    }
+    .logo{
+        margin-left: 8%;
     }
     .logo__text{
         visibility: hidden;
@@ -283,31 +293,36 @@ header{
         margin-left: 5%;
     }
     .menu{
-        margin-left: -30%;
+        max-width: 50vw;
+    }
+    .search{
+        max-width: 50vw;
     }
     .menu-home{
-        position: relative;
+        
         top: 3px;
-        right: 7vw;
+        right: 4vw;
     }
     .menu2__button{
         min-width: 130px ;
     }
     .menu-home__item1{
-        margin-right: 10%;
+        margin-right: 8%;
     }
     .menu-home__item1{
         margin-right: 10%;
     }
-    .movies-container {
-       
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
+    
+    .send{
+        
+        right: 0px
     }
     .footer__text{
         font-weight: 400;
         font-size: 14px;
         line-height: 16px;
     }
-
+    .footer__container{
+        width: 100vw;
+    }
 }
