@@ -1,6 +1,10 @@
 import { API_KEY } from "./config";
+import { generatePages } from "./pagination";
+
 const watchedBtn = document.getElementById('watched-movies--btn');
 const watchedContainer = document.getElementById('movies-container');
+const ulPages = document.querySelector('.pagination__page');
+let currentPage = 1;
 watchedBtn.addEventListener('click', renderWatchedMovies);
 function renderWatchedMovies() {
   const watchedMoviesList = JSON.parse(localStorage.getItem('watchedList'));
@@ -11,32 +15,66 @@ function renderWatchedMovies() {
       .then(response => response.json());
   });
 
-  Promise.all(fetchPromises)
-    .then(moviesData => {
-      moviesData.forEach(data => {
-        const baseImageUrl = 'https://image.tmdb.org/t/p/';
-        const moviePoster = `${baseImageUrl}w500${data.posterPath}`;
-        const genreNames = data.genres.map((genre) => genre.name).join(' | ');
-        const movieHTML = `
-        <div class="photo-card">
-        <div class="info">
-        <a onclick="openModal('${data.id}')" class="info__poster">
-            <img class="info__poster--img" src="${moviePoster}" alt="${data.title}" loading="lazy" width="100px" height="100px" id="info__poster--img" />
-          </a>
-          <h3 class="info__title">
-            <strong class="title">${data.title}</strong>
-          </h3>
-          <p class="info__genre">
-            ${genreNames} | ${data.releaseYear}
-          </p>
-          <p class="info-item"></p>
-        </div>
-      </div>
-        `;
-        moviesHTML += movieHTML;
-      });
+const total_pages = (watchedMoviesLength) => {
+  return watchedMoviesLength >= 20 ? Math.ceil(watchedMoviesLength / 20) : 1;
+};
 
-      watchedContainer.innerHTML = moviesHTML;
-    })
-    .catch(error => console.error(error));
+  fetchMovies(1)
+  function fetchMovies(currentPage) {
+   let moviesHTML = '';
+    Promise.all(fetchPromises)
+      .then(moviesData => {
+        //get all for pagination---------------------
+        const watchedMoviesLength = watchedMoviesList.length;
+        const li = generatePages(currentPage, total_pages(watchedMoviesLength));
+        ulPages.innerHTML = li;
+        //------------------------------------------------
+
+        const pageSize = 20; // Tamaño de cada página
+        const startIndex =
+          currentPage === 1 ? 1 : (currentPage - 1) * pageSize + 1;
+        const endIndex = Math.min(currentPage*pageSize, moviesData.length);
+
+        for (let i = startIndex; i < endIndex; i++) {
+          const data = moviesData[i];
+          const baseImageUrl = 'https://image.tmdb.org/t/p/';
+          const moviePoster = `${baseImageUrl}w500${data.posterPath}`;
+          const genreNames = data.genres.map(genre => genre.name).join(' | ');
+          const movieHTML = `
+    <div class="photo-card">
+      <div class="info">
+        <a onclick="openModal('${data.id}')" class="info__poster">
+          <img class="info__poster--img" src="${moviePoster}" alt="${data.title}" loading="lazy" width="100px" height="100px" id="info__poster--img" />
+        </a>
+        <h3 class="info__title">
+          <strong class="title">${data.title}</strong>
+        </h3>
+        <p class="info__genre">
+          ${genreNames} | ${data.releaseYear}
+        </p>
+        <p class="info-item"></p>
+      </div>
+    </div>
+  `;
+          moviesHTML += movieHTML;
+        }
+
+        watchedContainer.innerHTML = moviesHTML;
+      })
+      .catch(error => console.error(error));
+  }
+
+function handlePageClick(event) {
+  if (event.target.tagName === 'LI') {
+    const clickedValue = event.target.innerText;
+    const clickedValueInt = parseInt(clickedValue);
+    if (clickedValue === '...') {
+    } else {
+      currentPage = clickedValueInt;
+      event.stopPropagation();
+      fetchMovies(currentPage);
+    }
+  }
 }
+
+ulPages.addEventListener('click', handlePageClick); // Agregar el evento de clic actualizado

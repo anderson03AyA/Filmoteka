@@ -1,6 +1,5 @@
-import { API_KEY } from "./config";
+import { API_KEY } from './config';
 export const getGenres = async () => {
-
   const options = {
     method: 'GET',
     headers: {
@@ -16,7 +15,7 @@ export const getGenres = async () => {
       options
     );
 
-      const data = await response.json();
+    const data = await response.json();
     return data;
   } catch (err) {
     console.error(err);
