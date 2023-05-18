@@ -50,13 +50,15 @@ function renderQueueMovies() {
             <div class="photo-card">
               <div class="info">
                 <a onclick="openModal('${data.id}')" class="info__poster">
-                  <img class="info__poster--img" src="${moviePoster}" alt="${data.title}" loading="lazy" width="100px" height="100px" id="info__poster--img" />
+                  <img class="info__poster--img" src="${moviePoster}" alt="${
+            data.title
+          }" loading="lazy" width="100px" height="100px" id="info__poster--img" />
                 </a>
                 <h3 class="info__title">
                   <strong class="title">${data.title}</strong>
                 </h3>
                 <p class="info__genre">
-                  ${genreNames} | ${data.release_date}
+                  ${genreNames} | ${new Date(data.release_date).getFullYear()}
                 </p>
                 <p class="info-item"></p>
               </div>
