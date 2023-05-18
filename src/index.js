@@ -74,6 +74,7 @@ async function getTrending() {
 async function showTrending() {
   const data = await getTrending();
   console.log('trending' + data.results);
+  data.total_pages = 1;
   showMovies(data);
 }
 showTrending();
