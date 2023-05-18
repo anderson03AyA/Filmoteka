@@ -15,11 +15,10 @@ function renderQueueMovies() {
   Promise.all(fetchPromises)
     .then(moviesData => {
       moviesData.forEach(data => {
-        console.log(data)
         if (data.release_date === '') {
           data.release_date = "Sin año registrado"
         }
-        
+
         const baseImageUrl = 'https://image.tmdb.org/t/p/';
         const moviePoster = `${baseImageUrl}w500${data.poster_path}`;
         const genreNames = data.genres.map(genre => genre.name).join(' | ');

@@ -7,10 +7,10 @@ const ulPages = document.querySelector('.pagination__page');
 let currentPage = 1;
 watchedBtn.addEventListener('click', renderWatchedMovies);
 function renderWatchedMovies() {
-  const watchedMoviesList = JSON.parse(localStorage.getItem('watchedList'));
+  const watchedList = JSON.parse(localStorage.getItem('watchedList')) || [];
   let moviesHTML = '';
 
-  const fetchPromises = watchedMoviesList.map(movieID => {
+  const fetchPromises = watchedList.map(movieID => {
     return fetch(
       `https://api.themoviedb.org/3/movie/${movieID}?api_key=${API_KEY}&language=en`
     ).then(response => response.json());
@@ -26,7 +26,7 @@ function renderWatchedMovies() {
     Promise.all(fetchPromises)
       .then(moviesData => {
         //get all for pagination---------------------
-        const watchedMoviesLength = watchedMoviesList.length;
+        const watchedMoviesLength = watchedList.length;
         const li = generatePages(currentPage, total_pages(watchedMoviesLength));
         ulPages.innerHTML = li;
         //------------------------------------------------
