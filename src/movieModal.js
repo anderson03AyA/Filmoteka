@@ -9,11 +9,13 @@ addToWatchedBtn.addEventListener('click', ()=>{
 addToQueueBtn.addEventListener('click', ()=>{
     addToQueue()
 })
+
 const btnCloseModal = document.getElementById('movie-modal--close-btn');
 const modal = document.getElementById('movie-modal');
 btnCloseModal.addEventListener('click', () => {
     modal.style.display = 'none';
 });
+
 window.openModal = function (movie) {
     
     const modal = document.getElementById('movie-modal');
@@ -44,7 +46,11 @@ fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language
     votes.textContent = data.vote_average + ' / ' + data.vote_count;
     popularity.textContent = data.popularity;
     originalTitle.textContent = data.original_title;
-    genre.textContent = data.genres;
+    // genre.textContent = data.genres;
+    const genreName = data.genres.map((genre) =>genre.name).join(' | ');
+    // console.log(genreName);
+    genre.textContent = genreName;
+
     about.textContent = data.overview;
     addToWatchedBtn.value = data.id;
     addToQueueBtn.value = data.id;
