@@ -51,6 +51,7 @@ function showMovies(data) {
     const movieCards = movies.map(movie => {
       const idGenres = movie.genre_ids;
       const genres = resultsGenre.filter(genre => idGenres.includes(genre.id));
+      //format year
       return MovieCard({
         id: movie.id,
         title: movie.title,
