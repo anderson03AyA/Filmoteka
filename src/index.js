@@ -3,11 +3,16 @@ import { getGenres } from './genres';
 import Swal from 'sweetalert2';
 import { generatePages } from './pagination';
 import { MovieCard } from './movieCard';
+import { after } from './after';
 
 const ulPages = document.querySelector('.pagination__page');
 const searchInput = document.querySelector('.search');
 const send = document.querySelector('.send');
 const div = document.querySelector('.movies-container');
+after();
+
+
+
 
 let modalAlert;
 let currentPage = 1;
@@ -46,6 +51,7 @@ function showMovies(data) {
     const movieCards = movies.map(movie => {
       const idGenres = movie.genre_ids;
       const genres = resultsGenre.filter(genre => idGenres.includes(genre.id));
+      //format year
       return MovieCard({
         id: movie.id,
         title: movie.title,
