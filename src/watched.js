@@ -5,7 +5,10 @@ const watchedBtn = document.getElementById('watched-movies--btn');
 const watchedContainer = document.getElementById('movies-container');
 const ulPages = document.querySelector('.pagination__page');
 let currentPage = 1;
+let totalPages = 1; // Variable para almacenar el número total de páginas
+
 watchedBtn.addEventListener('click', renderWatchedMovies);
+
 function renderWatchedMovies() {
   const watchedList = JSON.parse(localStorage.getItem('watchedList')) || [];
   let moviesHTML = '';
@@ -19,6 +22,7 @@ function renderWatchedMovies() {
   const total_pages = watchedMoviesLength => {
     return watchedMoviesLength >= 20 ? Math.ceil(watchedMoviesLength / 20) : 1;
   };
+
   fetchMovies(1);
 
   function fetchMovies(currentPage) {
@@ -29,11 +33,9 @@ function renderWatchedMovies() {
         const watchedMoviesLength = watchedList.length;
         const li = generatePages(currentPage, total_pages(watchedMoviesLength));
         ulPages.innerHTML = li;
-        //------------------------------------------------
 
         const pageSize = 20; // Tamaño de cada página
-        const startIndex =
-          currentPage === 1 ? 1 : (currentPage - 1) * pageSize + 1;
+        const startIndex = currentPage === 1 ? 0 : (currentPage - 1) * pageSize;
         const endIndex = Math.min(currentPage * pageSize, moviesData.length);
 
         for (let i = startIndex; i < endIndex; i++) {
@@ -42,21 +44,21 @@ function renderWatchedMovies() {
           const moviePoster = `${baseImageUrl}w500${data.posterPath}`;
           const genreNames = data.genres.map(genre => genre.name).join(' | ');
           const movieHTML = `
-    <div class="photo-card">
-      <div class="info">
-        <a onclick="openModal('${data.id}')" class="info__poster">
-          <img class="info__poster--img" src="${moviePoster}" alt="${data.title}" loading="lazy" width="100px" height="100px" id="info__poster--img" />
-        </a>
-        <h3 class="info__title">
-          <strong class="title">${data.title}</strong>
-        </h3>
-        <p class="info__genre">
-          ${genreNames} | ${data.releaseYear}
-        </p>
-        <p class="info-item"></p>
-      </div>
-    </div>
-  `;
+            <div class="photo-card">
+              <div class="info">
+                <a onclick="openModal('${data.id}')" class="info__poster">
+                  <img class="info__poster--img" src="${moviePoster}" alt="${data.title}" loading="lazy" width="100px" height="100px" id="info__poster--img" />
+                </a>
+                <h3 class="info__title">
+                  <strong class="title">${data.title}</strong>
+                </h3>
+                <p class="info__genre">
+                  ${genreNames} | ${data.releaseYear}
+                </p>
+                <p class="info-item"></p>
+              </div>
+            </div>
+          `;
           moviesHTML += movieHTML;
         }
 
@@ -77,5 +79,33 @@ function renderWatchedMovies() {
       }
     }
   }
+
   ulPages.addEventListener('click', handlePageClick); // Agregar el evento de clic actualizado
+
+
+document
+  .getElementById('library__prev-page')
+  .addEventListener('click', async () => {
+    if (currentPage > 1) {
+      currentPage--;
+      await fetchMovies(parseInt(currentPage));
+      updateCurrentPageText(currentPage);
+    }
+  });
+
+document
+  .getElementById('library__next-page')
+  .addEventListener('click', async () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      await fetchMovies(parseInt(currentPage));
+      updateCurrentPageText(parseInt(currentPage));
+    }
+  });
+
+function updateCurrentPageText() {
+  const currentPageElement = document.getElementById('current-page');
+  currentPageElement.innerText = currentPage;
+}
+
 }

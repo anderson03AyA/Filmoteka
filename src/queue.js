@@ -1,7 +1,14 @@
 import { API_KEY } from './config';
+import { generatePages } from './pagination';
+
 const queueBtn = document.getElementById('queue-movies--btn');
 const queueContainer = document.getElementById('movies-container');
+const ulPages = document.querySelector('.pagination__page');
+let currentPage = 1;
+let totalPages = 1;
+
 queueBtn.addEventListener('click', renderQueueMovies);
+
 function renderQueueMovies() {
   const queueMoviesList = JSON.parse(localStorage.getItem('queueList'));
   let moviesHTML = '';

@@ -11,6 +11,7 @@ const modal = document.getElementById('movie-modal');
 btnCloseModal.addEventListener('click', () => {
     modal.style.display = 'none';
 });
+
 window.openModal = function (movie) {
 
     const modal = document.getElementById('movie-modal');
@@ -64,24 +65,29 @@ function getMovieData(movieID) {
         })
     }
 
+fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=${language}`)
+  .then(response => response.json())
+  .then(data => {
+    img.src = `${baseImageUrl}w500${data.poster_path}`;
+    title.textContent = data.title;
+    votes.textContent = data.vote_average + ' / ' + data.vote_count;
+    popularity.textContent = data.popularity;
+    originalTitle.textContent = data.original_title;
+    // genre.textContent = data.genres;
+    const genreName = data.genres.map((genre) =>genre.name).join(' | ');
+    // console.log(genreName);
+    genre.textContent = genreName;
 
-    fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=${language}`)
-        .then(response => response.json())
-        .then(data => {
-            img.src = `${baseImageUrl}w500${data.poster_path}`;
-            title.textContent = data.title;
-            votes.textContent = data.vote_average + ' / ' + data.vote_count;
-            popularity.textContent = data.popularity;
-            originalTitle.textContent = data.original_title;
-            genre.textContent = data.genres;
-            about.textContent = data.overview;
-            addToWatchedBtn.value = data.id;
-            addToQueueBtn.value = data.id;
-        })
-        .catch(error => console.error(error));
-}
-function addToWatched() {
-    if (!watchedList) {
+    about.textContent = data.overview;
+    addToWatchedBtn.value = data.id;
+    addToQueueBtn.value = data.id;
+  })
+  .catch(error => console.error(error));
+} 
+function addToWatched(){
+    const watchedList = JSON.parse(localStorage.getItem('watchedList')) || [];
+    
+    if(!watchedList){
         watchedList = JSON.stringify([addToWatchedBtn.value]);
     } else {
         const idExists = watchedList.includes(addToWatchedBtn.value)
