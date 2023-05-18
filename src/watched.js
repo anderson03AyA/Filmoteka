@@ -83,29 +83,29 @@ function renderWatchedMovies() {
   ulPages.addEventListener('click', handlePageClick); // Agregar el evento de clic actualizado
 
 
-document
-  .getElementById('library__prev-page')
-  .addEventListener('click', async () => {
-    if (currentPage > 1) {
-      currentPage--;
-      await fetchMovies(parseInt(currentPage));
-      updateCurrentPageText(currentPage);
-    }
-  });
+  document
+    .getElementById('library__prev-page')
+    .addEventListener('click', async () => {
+      if (currentPage > 1) {
+        currentPage--;
+        await fetchMovies(parseInt(currentPage));
+        updateCurrentPageText(currentPage);
+      }
+    });
 
-document
-  .getElementById('library__next-page')
-  .addEventListener('click', async () => {
-    if (currentPage < totalPages) {
-      currentPage++;
-      await fetchMovies(parseInt(currentPage));
-      updateCurrentPageText(parseInt(currentPage));
-    }
-  });
+  document
+    .getElementById('library__next-page')
+    .addEventListener('click', async () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        await fetchMovies(parseInt(currentPage));
+        updateCurrentPageText(parseInt(currentPage));
+      }
+    });
 
-function updateCurrentPageText() {
-  const currentPageElement = document.getElementById('current-page');
-  currentPageElement.innerText = currentPage;
-}
+  function updateCurrentPageText() {
+    const currentPageElement = document.getElementById('current-page');
+    currentPageElement.innerText = currentPage;
+  }
 
 }
