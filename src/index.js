@@ -35,11 +35,7 @@ async function getMovies(page) {
 function showMovies(data) {
   if (data.results && data.results.length > 0) {
     if (modalAlert == 0) {
-      Swal.fire(
-        'Felicidades!',
-        `Se han encontrado ${data.total_results} peliculas`,
-        'success'
-      );
+
       modalAlert = modalAlert + 1;
     } else {
       modalAlert = 1;
@@ -92,6 +88,16 @@ async function showMoviesByPage(page) {
   const data = await getMovies(page);
   showMovies(data);
 }
+searchInput.addEventListener('input', async e => {
+  e.preventDefault();
+  if (searchInput.value === '') {
+    return;
+  }
+  modalAlert = 0;
+  currentPage = 1;
+  await showMoviesByPage(currentPage);
+});
+
 
 send.addEventListener('click', async e => {
   e.preventDefault();
