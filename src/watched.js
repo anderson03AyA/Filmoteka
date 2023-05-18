@@ -58,7 +58,7 @@ function renderwatchedMovies() {
                   <strong class="title">${data.title}</strong>
                 </h3>
                 <p class="info__genre">
-                  ${genreNames} | ${new Date(release_date).getFullYear()}
+                  ${genreNames} | ${new Date(data.release_date).getFullYear()}
                 </p>
                 <p class="info-item"></p>
               </div>
