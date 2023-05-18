@@ -10,10 +10,10 @@ let totalPages = 1; // Variable para almacenar el número total de páginas
 watchedBtn.addEventListener('click', renderWatchedMovies);
 
 function renderWatchedMovies() {
-  const watchedMoviesList = JSON.parse(localStorage.getItem('watchedList'));
+  const watchedList = JSON.parse(localStorage.getItem('watchedList')) || [];
   let moviesHTML = '';
 
-  const fetchPromises = watchedMoviesList.map(movieID => {
+  const fetchPromises = watchedList.map(movieID => {
     return fetch(
       `https://api.themoviedb.org/3/movie/${movieID}?api_key=${API_KEY}&language=en`
     ).then(response => response.json());
@@ -29,9 +29,9 @@ function renderWatchedMovies() {
     let moviesHTML = '';
     Promise.all(fetchPromises)
       .then(moviesData => {
-        const watchedMoviesLength = watchedMoviesList.length;
-        totalPages = total_pages(watchedMoviesLength); // Asignar el número total de páginas
-        const li = generatePages(currentPage, totalPages);
+        //get all for pagination---------------------
+        const watchedMoviesLength = watchedList.length;
+        const li = generatePages(currentPage, total_pages(watchedMoviesLength));
         ulPages.innerHTML = li;
 
         const pageSize = 20; // Tamaño de cada página

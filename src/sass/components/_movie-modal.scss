@@ -77,6 +77,7 @@
   left: 95%;
   position: relative;
   top: 10px;
+  cursor: pointer;
 }
 
 .movie-modal--body {
@@ -114,11 +115,22 @@
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
+  cursor: pointer;
+}
+
+.add-to-watched--btn:focus, 
+.add-to-queue--btn:focus{
+  background-color: $color-genres;
 }
 
 .add-to-watched--btn:hover, 
 .add-to-queue--btn:hover{
   background-color: $color-genres;
+}
+
+.add-to-watched--btn:focus, 
+.add-to-queue--btn:focus{
+  color: $color-footer;
 }
 
 .add-to-watched--btn:hover, 
@@ -132,7 +144,7 @@
       width: 280px;
       height: auto;
       position: fixed;   
-      right: 55%;
+      // right: 50%;
   }
   .movie-image {
     img {
