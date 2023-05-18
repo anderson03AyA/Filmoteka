@@ -2,6 +2,7 @@ import { API_KEY } from './config';
 import { generatePages } from './pagination';
 
 const watchedBtn = document.getElementById('watched-movies--btn');
+const queueBtn = document.getElementById('queue-movies--btn');
 const watchedContainer = document.getElementById('movies-container');
 const ulPages = document.querySelector('.pagination__page');
 let currentPage = 1;
@@ -10,6 +11,10 @@ let totalPages = 1;
 watchedBtn.addEventListener('click', renderwatchedMovies);
 
 function renderwatchedMovies() {
+  
+  watchedBtn.classList.add('current--btn');
+  queueBtn.classList.remove('current--btn')
+
   const watchedMoviesList = JSON.parse(localStorage.getItem('watchedList'));
   let moviesHTML = '';
 
@@ -50,15 +55,14 @@ function renderwatchedMovies() {
             <div class="photo-card">
               <div class="info">
                 <a onclick="openModal('${data.id}')" class="info__poster">
-                  <img class="info__poster--img" src="${moviePoster}" alt="${
-            data.title
-          }" loading="lazy" width="100px" height="100px" id="info__poster--img" />
+                  <img class="info__poster--img" src="${moviePoster}" alt="${data.title
+            }" loading="lazy" width="100px" height="100px" id="info__poster--img" />
                 </a>
                 <h3 class="info__title">
                   <strong class="title">${data.title}</strong>
                 </h3>
                 <p class="info__genre">
-                  ${genreNames} | ${new Date(release_date).getFullYear()}
+                  ${genreNames} | ${new Date(data.release_date).getFullYear()}
                 </p>
                 <p class="info-item"></p>
               </div>

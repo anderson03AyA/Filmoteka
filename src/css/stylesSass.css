@@ -138,9 +138,10 @@ body {
   font-size: 25px;
 }
 
-.movie-modal-votes, .movie-modal-popularity,
-.movie-modal-original-title, .movie-modal-genre {
-  background: #f0e9e9;
+.movie-modal-votes,
+.movie-modal-popularity,
+.movie-modal-original-title,
+.movie-modal-genre {
   border-radius: 5px;
   padding-left: 10px;
   padding-right: 10px;
@@ -162,12 +163,15 @@ body {
 }
 
 .movie-modal--close-btn {
-  height: 30px;
-  width: 30px;
+  width: 35px;
   left: 95%;
   position: relative;
   top: 10px;
+  font-weight: bold;
+  font-style: bolder;
   cursor: pointer;
+  border: none;
+  background-color: white;
 }
 
 .movie-modal--body {
@@ -192,7 +196,37 @@ body {
   display: flex;
 }
 
-.add-to-watched--btn,
+.add-to-watched--btn {
+  box-sizing: border-box;
+  width: 136px;
+  height: 40px;
+  text-transform: uppercase;
+  background-color: #FF6B08;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  cursor: pointer;
+}
+.add-to-watched--btn:hover {
+  box-sizing: border-box;
+  width: 136px;
+  height: 40px;
+  text-transform: uppercase;
+  color: #000000;
+  border: 1px solid #000000;
+  background-color: white;
+  border-radius: 5px;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  cursor: pointer;
+}
+
 .add-to-queue--btn {
   box-sizing: border-box;
   width: 136px;
@@ -208,22 +242,19 @@ body {
   cursor: pointer;
 }
 
-.add-to-watched--btn:focus,
 .add-to-queue--btn:focus {
   background-color: #FF6B08;
 }
 
-.add-to-watched--btn:hover,
 .add-to-queue--btn:hover {
   background-color: #FF6B08;
+  border: none;
 }
 
-.add-to-watched--btn:focus,
 .add-to-queue--btn:focus {
   color: #F7F7F7;
 }
 
-.add-to-watched--btn:hover,
 .add-to-queue--btn:hover {
   color: #F7F7F7;
 }
