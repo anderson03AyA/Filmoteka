@@ -210,7 +210,15 @@ header{
     background-color: #FF6B08;
 }
                                         /* responsive */
- 
+ .menu-home .menu-home__item1.selected::after,
+.menu-home .menu-home__item1:hover::after {
+  opacity: 1;
+}
+
+.menu-home .menu-home__item2.selected::after,
+.menu-home .menu-home__item2:hover::after {
+  opacity: 1;
+}
 /* @media screen and (max-width:1200px){
     .container{
         width: 100vw;
