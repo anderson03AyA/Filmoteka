@@ -11,9 +11,6 @@ const send = document.querySelector('.send');
 const div = document.querySelector('.movies-container');
 after();
 
-
-
-
 let modalAlert;
 let currentPage = 1;
 let totalPages = 1;
@@ -35,7 +32,6 @@ async function getMovies(page) {
 function showMovies(data) {
   if (data.results && data.results.length > 0) {
     if (modalAlert == 0) {
-
       modalAlert = modalAlert + 1;
     } else {
       modalAlert = 1;
@@ -75,7 +71,6 @@ async function getTrending() {
 }
 async function showTrending() {
   const data = await getTrending();
-  console.log('trending' + data.results);
   data.total_pages = 1;
   await listGenres;
   showMovies(data);
@@ -97,7 +92,6 @@ searchInput.addEventListener('input', async e => {
   currentPage = 1;
   await showMoviesByPage(currentPage);
 });
-
 
 send.addEventListener('click', async e => {
   e.preventDefault();
