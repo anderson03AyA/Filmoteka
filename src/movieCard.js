@@ -2,7 +2,7 @@ export function MovieCard({ title, releaseYear, posterPath, genres, id }) {
   const baseImageUrl = 'https://image.tmdb.org/t/p/';
   const moviePoster = `${baseImageUrl}w500${posterPath}`;
   const genreNames = genres.map(genre => genre.name).join(' | ');
-  
+
   // Obtener solo el año de la fecha de lanzamiento
   const year = new Date(releaseYear).getFullYear();
 

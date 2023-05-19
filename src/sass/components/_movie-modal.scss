@@ -1,7 +1,6 @@
 @import '../colors';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
-
 .movie-modal {
   display: none;
   padding-top: 10px;
@@ -15,7 +14,6 @@
   z-index: 2;
   position: fixed;
   transform: translate(50%, -50%);
-
 }
 
 .movie-image {
@@ -25,11 +23,11 @@
     height: 477.8px;
   }
 }
-.movie-modal-title{
-    font-size: 30px;
-    font-weight: 500;
-    text-transform: uppercase;
-    font-family: 'Roboto';   
+.movie-modal-title {
+  font-size: 30px;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-family: 'Roboto';
 }
 
 .movie-modal-info {
@@ -39,32 +37,33 @@
   width: 400px;
 }
 
-.movie-modal-rate-area{
+.movie-modal-rate-area {
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 200px;
   font-size: 25px;
-  
 }
 
-.movie-modal-votes, .movie-modal-popularity,
-.movie-modal-original-title, .movie-modal-genre{
-  background: #f0e9e9;
+.movie-modal-votes,
+.movie-modal-popularity,
+.movie-modal-original-title,
+.movie-modal-genre {
+  
   border-radius: 5px;
   padding-left: 10px;
   padding-right: 10px;
   font-size: 12px;
 }
 
-.movie-modal-about-title{
+.movie-modal-about-title {
   font-family: 'Roboto';
   font-weight: 500;
   line-height: 16px;
   text-transform: uppercase;
 }
 
-.movie-modal-about{
+.movie-modal-about {
   font-family: 'Roboto';
   font-weight: 500;
   font-size: 12px;
@@ -72,12 +71,16 @@
 }
 
 .movie-modal--close-btn {
-  height: 30px;
-  width: 30px;
+  width: 35px;
   left: 95%;
   position: relative;
   top: 10px;
+  font-weight: bold;
+  font-style: bolder;
+  
   cursor: pointer;
+  border: none;
+  background-color: white;
 }
 
 .movie-modal--body {
@@ -87,23 +90,52 @@
   margin: 20px 20px;
 }
 
-.movie-modal-rate-area--info{
-    width: 300px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 30px;
+.movie-modal-rate-area--info {
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 30px;
 }
 
-.movie-modal--btn-container{
+.movie-modal--btn-container {
   width: 300px;
   justify-content: space-between;
   align-items: center;
   display: flex;
 }
 
-.add-to-watched--btn, 
-.add-to-queue--btn{
+.add-to-watched--btn {
+  box-sizing: border-box;
+  width: 136px;
+  height: 40px;
+  text-transform: uppercase;
+  background-color: $color-genres;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  cursor: pointer;
+  &:hover {
+    box-sizing: border-box;
+    width: 136px;
+    height: 40px;
+    text-transform: uppercase;
+    color: $color-black;
+    border: 1px solid $color-black;
+    background-color: white;
+    border-radius: 5px;
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    cursor: pointer;
+  }
+}
+.add-to-queue--btn {
   box-sizing: border-box;
   width: 136px;
   height: 40px;
@@ -118,33 +150,30 @@
   cursor: pointer;
 }
 
-.add-to-watched--btn:focus, 
-.add-to-queue--btn:focus{
+.add-to-queue--btn:focus {
   background-color: $color-genres;
 }
 
-.add-to-watched--btn:hover, 
-.add-to-queue--btn:hover{
+.add-to-queue--btn:hover {
   background-color: $color-genres;
+  border: none;
 }
 
-.add-to-watched--btn:focus, 
-.add-to-queue--btn:focus{
+.add-to-queue--btn:focus {
   color: $color-footer;
 }
 
-.add-to-watched--btn:hover, 
-.add-to-queue--btn:hover{
+.add-to-queue--btn:hover {
   color: $color-footer;
 }
 
 @media screen and (min-width: 320px) AND (max-width: 767px) {
   .movie-modal {
-      position: absolute;
-      width: 280px;
-      height: auto;
-      position: fixed;   
-      // right: 50%;
+    position: absolute;
+    width: 280px;
+    height: auto;
+    position: fixed;
+    // right: 50%;
   }
   .movie-image {
     img {
@@ -154,51 +183,49 @@
       height: 356.57px;
     }
   }
-  .movie-modal-title{
+  .movie-modal-title {
     font-size: 10px;
     font-weight: 500;
     text-transform: uppercase;
-    font-family: 'Roboto';   
-}
-.movie-modal--body {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.movie-modal-info {
-  gap: 10px;
-  width: 240px;
-}
-.movie-modal-rate-area--info{
-  width: 240px;
-  font-size: 16px;
-}
-.movie-modal-title{
-  font-size: 20px;
-  line-height: 23px;
-}
-.movie-modal-about-title{
-  font-size: 12px;
-  padding-top: 20px;
-}
-.movie-modal--btn-container{
-  padding-top: 20px;
-  width: 220px;
-  padding-left: 20px;
-  gap: 20px;
-}
-.movie-modal--close-btn {
-  height: 30px;
-  width: 30px;
-  left: 82%;
-  position: relative;
-  top: 10px;
+    font-family: 'Roboto';
+  }
+  .movie-modal--body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .movie-modal-info {
+    gap: 10px;
+    width: 240px;
+  }
+  .movie-modal-rate-area--info {
+    width: 240px;
+    font-size: 16px;
+  }
+  .movie-modal-title {
+    font-size: 20px;
+    line-height: 23px;
+  }
+  .movie-modal-about-title {
+    font-size: 12px;
+    padding-top: 20px;
+  }
+  .movie-modal--btn-container {
+    padding-top: 20px;
+    width: 220px;
+    padding-left: 20px;
+    gap: 20px;
+  }
+  .movie-modal--close-btn {
+    height: 30px;
+    width: 30px;
+    left: 82%;
+    position: relative;
+    top: 10px;
+  }
 }
 
-}
-
-@media screen and (min-width: 768px) and (max-width: 1024px){
-
+@media screen and (min-width: 768px) and (max-width: 1024px) {
   .movie-modal {
     width: 618px;
     position: fixed;
